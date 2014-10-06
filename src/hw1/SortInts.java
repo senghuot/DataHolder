@@ -19,6 +19,7 @@ public class SortInts {
 			System.out.println("File not found.");
 		}
 		
+      PrintStream output = new PrintStream(new File("outfile.txt"));
 		Stack stack = new Stack();
 		stack.push(tree.getKey());
 		while(!stack.isEmpty()) {
@@ -27,7 +28,7 @@ public class SortInts {
 			stack.pop();
          if(!stack.isEmpty()) {
             Node tmp = stack.pop();
-			   System.out.println(tmp.getData());
+			   output.println(tmp.getData());
 			   stack.push(tmp.right);
          }
 		}
