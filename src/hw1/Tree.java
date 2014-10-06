@@ -5,7 +5,11 @@ public class Tree {
 	private Node root;
 	
 	public Tree() {
-		root = null;
+		this(null);
+	}
+	
+	public Tree(Node value) {
+		root = value;
 	}
 	
 	public void add(int value) {
@@ -25,6 +29,10 @@ public class Tree {
 	
 	public boolean isEmpty() {
 		return root == null;
+	}
+	
+	public Node getKey() {
+		return root;
 	}
 	
 	public Node leftSubTree() {

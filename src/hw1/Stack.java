@@ -23,19 +23,19 @@ public class Stack {
 				largerStorage[i] = largerStorage[i];
 			storage = largerStorage;
 		}
-		storage[++top] = value;
+		storage[top++] = value;
 	}
 	
 	public Node top() {
 		if(top == 0)
 			throw new EmptyStackException();
-		return storage[top];
+		return storage[top - 1];
 	}
 	
 	public Node pop() {
 		if(top == 0)
 			throw new EmptyStackException();
-		return storage[top--];
+		return storage[--top];
 	}
 	
 	public boolean isEmpty() {
