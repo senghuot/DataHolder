@@ -9,22 +9,22 @@ public class Tree {
 	private Node root;
 	
 	/**
-	 * @effect Construct a new Tree with root sets to null
+	 * @effect construct a new Tree with root sets to null
 	 */
 	public Tree() {
 		root = null;
 	}
    
 	/**
-	 * Add a new node to the tree.
-	 * @param int value stores as a node
+	 * add a new node to the tree.
+	 * @param int value stores as a node.
 	 */
 	public void add(int value) {
 		root = add(root, value);
 	}
 	
 	/**
-	 * Helper method to help adding new node to the tree.
+	 * helper method to help adding new node to the tree.
 	 * @param curr as a root of the tree.
 	 * @param value as a node to be inserted.
 	 * @return a node representation of the new tree.

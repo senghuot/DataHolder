@@ -12,7 +12,7 @@ public class Stack {
 	private int capacity;
 
 	/**
-	 * @effect Construct a new Stack
+	 * @effect construct a new Stack
 	 */
 	public Stack() {
 		capacity = 1000;
@@ -37,7 +37,7 @@ public class Stack {
 	}
 	
 	/**
-	 * Return the most recent push data without any pop operation.
+	 * return the most recent push data without any pop operation.
 	 * @return the most recent data.
 	 */
 	public Node top() {
