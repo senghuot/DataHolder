@@ -1,20 +1,30 @@
-package hw1;
+/**
+ * A stack data structure to store data in a fashion of last in first out.
+ * @author senghuot
+ */
 
 import java.util.EmptyStackException;
 
 public class Stack {
 
-	// reference to the top of the stack.
 	private int top;
 	private Node[] storage;
 	private int capacity;
 
+	/**
+	 * @effect Construct a new Stack
+	 */
 	public Stack() {
 		capacity = 1000;
 		storage = new Node[capacity];
 		top = 0;
 	}
 	
+	/**
+	 * push a node onto the stack. The size of the stack will be double when the stack
+	 * is getting full.
+	 * @param value to be push into the stack.
+	 */
 	public void push(Node value) {
 		if(top == storage.length) {
 			capacity *= 2;
@@ -26,12 +36,20 @@ public class Stack {
 		storage[top++] = value;
 	}
 	
+	/**
+	 * Return the most recent push data without any pop operation.
+	 * @return the most recent data.
+	 */
 	public Node top() {
 		if(top == 0)
 			throw new EmptyStackException();
 		return storage[top - 1];
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public Node pop() {
 		if(top == 0)
 			throw new EmptyStackException();
