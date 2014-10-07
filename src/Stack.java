@@ -47,8 +47,8 @@ public class Stack {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * @return most recently added node.
+	 * @throws EmptyStackException if attempt to pop an empty stack.
 	 */
 	public Node pop() {
 		if(top == 0)
@@ -56,6 +56,9 @@ public class Stack {
 		return storage[--top];
 	}
 	
+	/**
+	 * @return true iff the stack is empty else false.
+	 */
 	public boolean isEmpty() {
 		return top == 0;
 	}

@@ -1,5 +1,8 @@
-
-
+/**
+ * Read and attempt to sort inputs from user using a tree data structure.
+ * Traverse the tree using stack instead of recursively backtracking to keep
+ * track of the parent nodes. Output a file with sorted inputs.
+ */
 import java.io.*;
 import java.util.*;
 
