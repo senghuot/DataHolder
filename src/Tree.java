@@ -80,15 +80,15 @@ public class Tree {
 	public void output(String filename) throws FileNotFoundException {
 		PrintStream output = new PrintStream(new File(filename));
 		Stack stack = new Stack();
-		stack.push(root);
-		while(!stack.isEmpty()) {
-			while(stack.top() != null)
-				stack.push(stack.top().left);
-			stack.pop();
-			if(!stack.isEmpty()) {
-				Node tmp = stack.pop();
-				output.println(tmp.getKey());
-				stack.push(tmp.right);
+		Node curr = root;
+		while(!stack.isEmpty() || curr != null) {
+			if(curr != null) {
+				stack.push(curr);
+				curr = curr.left;
+			} else {
+				curr = stack.pop();
+				output.println(curr.getKey());
+				curr = curr.right;
 			}
 		}
 		output.close();		
