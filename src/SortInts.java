@@ -8,8 +8,7 @@ import java.util.*;
 
 public class SortInts {
 
-	public static void main(String[] args) throws FileNotFoundException {
-		
+	public static void main(String[] args) throws FileNotFoundException {		
 		// throw exception if user doesn't provide correct inputs.
  		if(args.length != 2)
  			throw new IllegalArgumentException("Please provide correct inputs.");
@@ -17,12 +16,12 @@ public class SortInts {
  		// read and construct a new tree based on user input. 
 		Tree tree = null;
 		try {
-			Scanner input = new Scanner(new File(args[0]));
+			Scanner input = new Scanner(new File("infile.txt"));
 			tree = new Tree( );
 			while(input.hasNextInt())
 				tree.add(input.nextInt());
 			input.close();
-			tree.output(args[1]);
+			tree.output("outfile.txt");
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found.");
 		}
