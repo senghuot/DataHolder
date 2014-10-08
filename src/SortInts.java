@@ -22,9 +22,9 @@ public class SortInts {
 			while(input.hasNextInt())
 				tree.add(input.nextInt());
 			input.close();
+			tree.output(args[1]);
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found.");
 		}
-		tree.output(args[1]);
 	}
 }
