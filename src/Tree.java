@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
+
 /**
  * A data structure use to represent a binary tree represent where left subtree contains
  * nodes left than or equals to parents and right subtree contains nodes larger than parent
@@ -53,14 +57,7 @@ public class Tree {
 	public int getKey() {
 		return root.getKey();
 	}
-	
-	/**
-	 * @return the root node of the tree.
-	 */
-	public Node getRoot() {
-		return root;
-	}
-	
+
 	/**
 	 * @return left subtree.
 	 */
@@ -73,5 +70,27 @@ public class Tree {
 	 */
 	public Node getRight() {
 		return root.right;
+	}
+	
+	/**
+	 * traverse tree using stack data structure to get key in sorted order 
+	 * then print out result to filename.
+	 * @param filename to be output the result.
+	 */
+	public void output(String filename) throws FileNotFoundException {
+		PrintStream output = new PrintStream(new File(filename));
+		Stack stack = new Stack();
+		stack.push(root);
+		while(!stack.isEmpty()) {
+			while(stack.top() != null)
+				stack.push(stack.top().left);
+			stack.pop();
+			if(!stack.isEmpty()) {
+				Node tmp = stack.pop();
+				output.println(tmp.getKey());
+				stack.push(tmp.right);
+			}
+		}
+		output.close();		
 	}
 }

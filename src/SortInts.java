@@ -25,21 +25,6 @@ public class SortInts {
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found.");
 		}
-		
-		// traverse tree using stack data structure then print output to a file.
-		PrintStream output = new PrintStream(new File(args[1]));
-		Stack stack = new Stack();
-		stack.push(tree.getRoot());
-		while(!stack.isEmpty()) {
-			while(stack.top() != null)
-				stack.push(stack.top().left);
-			stack.pop();
-			if(!stack.isEmpty()) {
-				Node tmp = stack.pop();
-				output.println(tmp.getKey());
-				stack.push(tmp.right);
-			}
-		}
-		output.close();
+		tree.output(args[1]);
 	}
 }
