@@ -16,12 +16,12 @@ public class SortInts {
  		// read and construct a new tree based on user input. 
 		Tree tree = null;
 		try {
-			Scanner input = new Scanner(new File(args[0]));
+			Scanner input = new Scanner(new File("input.txt"));
 			tree = new Tree( );
 			while(input.hasNextInt())
 				tree.add(input.nextInt());
 			input.close();
-			tree.output(args[1]);
+			tree.output("output.txt");
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found.");
 		}

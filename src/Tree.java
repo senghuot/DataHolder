@@ -16,7 +16,11 @@ public class Tree {
 	 * @effect construct a new Tree with root sets to null
 	 */
 	public Tree() {
-		root = null;
+		this(null);
+	}
+	
+	public Tree(Node root) {
+		this.root = root;
 	}
    
 	/**
@@ -61,15 +65,15 @@ public class Tree {
 	/**
 	 * @return left subtree.
 	 */
-	public Node getLeft() {
-		return root.left;
+	public Tree getLeft() {
+		return new Tree(root.left);
 	}
 	
 	/**		
 	 * @return right subtree.
 	 */
-	public Node getRight() {
-		return root.right;
+	public Tree getRight() {
+		return new Tree(root.right);
 	}
 	
 	/**
@@ -80,15 +84,15 @@ public class Tree {
 	public void output(String filename) throws FileNotFoundException {
 		PrintStream output = new PrintStream(new File(filename));
 		Stack stack = new Stack();
-		Node curr = root;
-		while(!stack.isEmpty() || curr != null) {
-			if(curr != null) {
+		Tree curr = this;
+		while(!stack.isEmpty() || !curr.isEmpty()) {
+			if(!curr.isEmpty()) {
 				stack.push(curr);
-				curr = curr.left;
+				curr = curr.getLeft();
 			} else {
 				curr = stack.pop();
 				output.println(curr.getKey());
-				curr = curr.right;
+				curr = curr.getRight();
 			}
 		}
 		output.close();		
