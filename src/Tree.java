@@ -18,7 +18,10 @@ public class Tree {
 	public Tree() {
 		this(null);
 	}
-	
+	/**
+	* @param root as a root of the tree.
+	* @effect construct a new Tree with user given root.
+	*/
 	public Tree(Node root) {
 		this.root = root;
 	}
