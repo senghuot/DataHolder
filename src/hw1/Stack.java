@@ -1,3 +1,4 @@
+package hw1;
 /**
  * A stack data structure to store data in a fashion of last in first out.
  * @author senghuot
