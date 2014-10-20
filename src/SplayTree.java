@@ -26,7 +26,7 @@ public class SplayTree {
 	 * @param key
 	 */
 	public void splay(int key) {
-		root = splay(root, key);
+		root = splay(root, key, 0);
 	}
 	
 	/**
@@ -35,19 +35,23 @@ public class SplayTree {
 	 * @param key
 	 * @return
 	 */
-	private SplayNode splay(SplayNode root, int key) {
+	private SplayNode splay(SplayNode root, int key, int depth) {
 		if(root == null)
 			return null;
 		
 		// going into left subtree
 		if(key < root.getKey()) {
-			if(root.left == null)
-				return root;
+			root.left = splay(root.left, key, depth + 1);
+			if(depth % 2 == 0) {
+				
+			}
 			
 		// going into right subtree
 		} else if(key > root.getKey()) {
-			if(root.right == null)
-				return root;
+			root.right = splay(root.right, key, depth + 1);
+			if(depth % 2 == 0) {
+				
+			}
 		}
 		
 		return root;
@@ -74,7 +78,7 @@ public class SplayTree {
 		
 		// splaying will bring the key to root to only then decide 
 		// weather duplicate occur else we would simply insert a new key.
-		root = splay(root, value);
+		splay(value);
 		if(value > root.getKey()) {
 			SplayNode tmp = new SplayNode(value);
 			tmp.left = root;
