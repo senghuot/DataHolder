@@ -25,8 +25,8 @@ public class SplayTree {
 	 * add a new node to the tree.
 	 * @param int value stores as a node.
 	 */
-	public void add(int value) {
-		root = add(root, value);
+	public void insert(int value) {
+		root = insert(root, value);
 	}
 	
 	/**
@@ -35,14 +35,14 @@ public class SplayTree {
 	 * @param value as a node to be inserted.
 	 * @return a node representation of the new tree.
 	 */
-	private SplayNode add(SplayNode root, int value) {
+	private SplayNode insert(SplayNode root, int value) {
 		if(root == null)
 			return new SplayNode(value);
 		
 		if(value <= root.getKey())
-			root.left = add(root.left, value);
+			root.left = insert(root.left, value);
 		else
-			root.right = add(root.right, value);
+			root.right = insert(root.right, value);
 		return root;
 	}
 }
