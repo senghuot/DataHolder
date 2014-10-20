@@ -39,10 +39,29 @@ public class SplayTree {
 		if(root == null)
 			return null;
 		
-		if()
+		// going into left subtree
+		if(key < root.getKey()) {
+			if(root.left == null)
+				return root;
+			
+		// going into right subtree
+		} else if(key > root.getKey()) {
+			if(root.right == null)
+				return root;
+		}
 		
-		return null;
+		return root;
 	}
+	
+	/**
+	 * 
+	 * @param root
+	 * @return
+	 */
+	private SplayNode rotate(SplayNode root, char dir) {
+		
+		return root;
+	} 
 	
 	/**
 	 * add a new node to the tree.
