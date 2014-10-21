@@ -28,7 +28,7 @@ public class SplayTree {
 	 */
 	public void splay(int key) {
 		root = splay(root, key);
-      if(key < root.getKey()) {
+      if(splayRoot.getKey() < root.getKey()) {
          if(root.left == null)
             return;
          SplayNode tmpRoot = root.left;
@@ -37,7 +37,7 @@ public class SplayTree {
          tmpRoot.right = root;
          root = tmpRoot;
          
-      }else if(key > root.getKey()) {
+      }else if(splayRoot.getKey() > root.getKey()) {
          if(root.right == null)
             return;
          SplayNode tmpRoot = root.right;
@@ -93,6 +93,7 @@ public class SplayTree {
 				root = rotate(root, "rl");	   
 		}
 		
+      splayRoot = root;
 		return root;
 	}
 	
@@ -108,7 +109,8 @@ public class SplayTree {
          SplayNode subC = root.left.right;
          tmpRoot.right = root.left;
          tmpRoot.right.left = subB;
-         root = tmpRoot;
+         tmpRoot.right.right = root;
+         root.left = subC;
          return tmpRoot;
          
       }else if(dir.equals("rr")) {
@@ -117,6 +119,7 @@ public class SplayTree {
          SplayNode subC = tmpRoot.left;
          tmpRoot.left = root.right;
          tmpRoot.left.right = subC;
+         tmpRoot.left.left = root;
          root.right = subB;
          return tmpRoot;
          

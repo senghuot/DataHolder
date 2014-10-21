@@ -13,5 +13,9 @@ public class RunDictionary {
       t.insert(15);
       t.insert(20);
       t.insert(12);
+      t.insert(11);
+      t.insert(13);
+      t.insert(9);
+      t.insert(10);
    }  
 }
