@@ -5,5 +5,13 @@
  * @author Senghuot Lim
  */
 public class RunDictionary {
-
+   
+   public static void main(String[] args) {
+      SplayTree t = new SplayTree();
+      t.insert(10);
+      t.insert(5);
+      t.insert(15);
+      t.insert(20);
+      t.insert(12);
+   }  
 }
