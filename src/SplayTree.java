@@ -1,3 +1,5 @@
+import java.io.PrintStream;
+
 /**
  * 
  * @author Senghuot Lim
@@ -147,7 +149,7 @@ public class SplayTree {
    */
    public boolean lookup(int key) {
       splay(key);
-      return (key == root.getKey());
+      return (root != null && key == root.getKey());
    }
    
    /**
@@ -177,6 +179,31 @@ public class SplayTree {
 	   // then make the second tree the right subtree
 	   tmpNode.right = t2.root;
 	   return new SplayTree(tmpNode);
+   }
+   
+   public void display(String command, PrintStream output) {
+	   output.println(command);
+	   display(root, "", output);
+   }
+   
+   private void display(SplayNode root, String inden, PrintStream output) {
+	   if (root == null)
+		   return;
+	   
+      // print out the root
+      output.println(inden + root.getKey());
+      
+	   // print left subtree
+	   if (root.left == null && root.right != null)
+		   output.println(inden + "  -");
+	   else
+		   display(root.left, inden + "  ", output);
+
+	   // print right subtree
+	   if (root.left != null && root.right == null)
+		   output.println(inden + "  -");
+	   else
+		   display(root.right, inden + "  ", output);
    }
    
 }
