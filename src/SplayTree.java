@@ -6,7 +6,7 @@
 public class SplayTree {
 
 	private SplayNode root;
-	private SplayNode splayRoot;
+	private SplayNode splayNode;
 	/**
 	 * @effect construct a new Tree with root sets to null
 	 */
@@ -19,7 +19,7 @@ public class SplayTree {
 	*/
 	public SplayTree(SplayNode root) {
 		this.root = root;
-		splayRoot = null;
+		splayNode = null;
 	}
    
 	/**
@@ -28,24 +28,11 @@ public class SplayTree {
 	 */
 	public void splay(int key) {
 		root = splay(root, key);
-      if(splayRoot.getKey() < root.getKey()) {
-         if(root.left == null)
-            return;
-         SplayNode tmpRoot = root.left;
-         SplayNode subB = tmpRoot.right;
-         root.left = subB;
-         tmpRoot.right = root;
-         root = tmpRoot;
-         
-      }else if(splayRoot.getKey() > root.getKey()) {
-         if(root.right == null)
-            return;
-         SplayNode tmpRoot = root.right;
-         SplayNode subC = tmpRoot.left;
-         root.right = subC;
-         tmpRoot.left = root;
-         root = tmpRoot;
-      }   
+      if (splayNode.getKey() < root.getKey() && root.left != null)
+         root = rotate(root, 'l');
+      else if (splayNode.getKey() > root.getKey() && root.right != null)
+         root = rotate(root, 'r');      
+		splayNode = null;
 	}
 	
 	/**
@@ -54,46 +41,51 @@ public class SplayTree {
 	 * @param key
 	 * @return
 	 */
-	private SplayNode splay(SplayNode root, int key) {
-		if(root == null)
-			return null;
-		
+	private SplayNode splay(SplayNode root, int key) {		
 		// going into left subtree
-		if(key < root.getKey()) {
-         if(root.left == null) {
-            splayRoot = root;
+      if (key < root.getKey()) {
+			if(root.left == null) {
+				splayNode = root;
+				return root;
+			}
+			// hoop into left subtree
+			root.left = splay(root.left, key);
+         
+			// check if current node is a parent
+			if(root.left == splayNode)
+				return root;
+			// check if current node is a grandparent
+			if(key < root.left.getKey()) {
+				root = rotate(root, 'l');
+				root = rotate(root, 'l');
+			}else {
+				root.left = rotate(root.left, 'r');
+				root = rotate(root, 'l');
+			}
+
+		// going into right subtree
+      } else if (key > root.getKey()) {
+         if (root.right == null) {
+            splayNode = root;
             return root;
          }
-         root.left = splay(root.left, key);
-         // current node is a parent
-			if(root.left == splayRoot)
-				return root;
-         
-         // current node is a grandparent
-         if(root.left != null && key < root.left.getKey())
-				root = rotate(root, "ll");
-			else if(root.right != null)
-				root = rotate(root, "lr");
-            
-		// going into right subtree
-		} else if(key > root.getKey()) {
-         if(root.right == null) {
-            splayRoot = root;
-            return root;
-         }           
+			// hoop into right subtree
 			root.right = splay(root.right, key);
-         // current node is a parent
-			if(root.right == splayRoot)
+         
+			// check if current node is a parent
+			if (root.right == splayNode)
 				return root; 
-            
-         // current node is a grandparent
-         if(root.left != null && key > root.left.getKey())
-				root = rotate(root, "rr");
-			else if(root.right != null)
-				root = rotate(root, "rl");	   
-		}
-		
-      splayRoot = root;
+			// check if current node is a grandparent
+			if (key > root.right.getKey()) {
+				root = rotate(root, 'r');
+				root = rotate(root, 'r');
+			} else {
+				root.right = rotate(root.right, 'l');
+				root = rotate(root, 'r');
+			}
+      }
+
+      splayNode = root;
 		return root;
 	}
 	
@@ -102,47 +94,21 @@ public class SplayTree {
 	 * @param root
 	 * @return
 	 */
-	private SplayNode rotate(SplayNode root, String dir) {
-		if(dir.equals("ll")) {
-         SplayNode tmpRoot = root.left.left;
-         SplayNode subB = tmpRoot.right;
-         SplayNode subC = root.left.right;
-         tmpRoot.right = root.left;
-         tmpRoot.right.left = subB;
-         tmpRoot.right.right = root;
-         root.left = subC;
-         return tmpRoot;
-         
-      }else if(dir.equals("rr")) {
-         SplayNode tmpRoot = root.right.right;
-         SplayNode subB = root.right.left;
-         SplayNode subC = tmpRoot.left;
-         tmpRoot.left = root.right;
-         tmpRoot.left.right = subC;
-         tmpRoot.left.left = root;
-         root.right = subB;
-         return tmpRoot;
-         
-      }else if(dir.equals("rl")) {
-         SplayNode tmpRoot = root.left.right;
-         SplayNode subA = root.left.left; 
-         SplayNode subB = tmpRoot.left;
-         SplayNode subC = tmpRoot.right;
-         tmpRoot.left = root.right;
-         tmpRoot.right = root;
-         root.left = subC;
-         tmpRoot.left.right = subB;
-         return tmpRoot;      
-      
-      }else {
-         SplayNode tmpRoot = root.right.left;
-         SplayNode subB = tmpRoot.right;
-         SplayNode subC = tmpRoot.left; 
-         tmpRoot.left = root;
-         tmpRoot.right = root.right;
-         tmpRoot.right.left = subC;
-         tmpRoot.left.right = subB;
-         return tmpRoot;     
+	private SplayNode rotate(SplayNode root, char dir) {
+      if (dir == 'l') {
+          SplayNode tmpRoot = root.left;
+          SplayNode subB = tmpRoot.right;
+          root.left = subB;
+          tmpRoot.right = root;
+          root = tmpRoot;
+          return tmpRoot;
+      } else {
+          SplayNode tmpRoot = root.right;
+          SplayNode subB = tmpRoot.left;
+          tmpRoot.left = root;
+          root.right = subB;
+          root = tmpRoot;
+          return tmpRoot;
       }
 	} 
 	
@@ -152,36 +118,35 @@ public class SplayTree {
 	 */
 	public void insert(int value) {
 		// the tree is initially empty.
-		if(root == null)
-			root = new SplayNode(value);
+		if (root == null)
+		    root = new SplayNode(value);
 		else {   
-   		// splaying will bring the key to root to only then decide 
-   		// weather duplicate occur else we would simply insert a new key.
-   		splay(value);
-   		if(value > root.getKey()) {
-   			SplayNode tmp = new SplayNode(value);
-   			tmp.left = root;
-   			tmp.right = root.right;
-   			root.right = null;
-   			root = tmp;
-   		} else if(value < root.getKey()) {
-   			SplayNode tmp = new SplayNode(value);
-   			tmp.right = root;
-   			tmp.left = root.left;
-   			root.left = null;
-   			root = tmp;
-   		}
-      }
+			// splaying will bring the key to root to only then decide 
+			// weather duplicate occur else we would simply insert a new key.
+			splay(value);
+			if (value > root.getKey()) {
+				SplayNode tmp = new SplayNode(value);
+				tmp.left = root;
+				tmp.right = root.right;
+				root.right = null;
+				root = tmp;
+			} else if(value < root.getKey()) {
+				SplayNode tmp = new SplayNode(value);
+				tmp.right = root;
+				tmp.left = root.left;
+				root.left = null;
+				root = tmp;
+			}
+		}
 	}
-	
-	/**
-	 * Print out the current state of the tree using preorder tra
-	 */
-	public void display() {
-		display(root);
-	}
-	
-	private void display(SplayNode root) {
-		
-	}
+   
+   /**
+   *
+   */
+   public boolean lookup(int key) {
+      splay(key);
+      return (key == root.getKey());
+   }
+   
+   
 }
