@@ -119,15 +119,11 @@ public class SplayTree {
 	 * add a new node to the tree.
 	 * @param int value stores as a node.
 	 */
-	public void insert(int value) {
-		// the tree is initially empty.
-		if (root == null)
-		    root = new SplayNode(value);
-		else {   
-			// splaying will bring the key to root to only then decide 
-			// weather duplicate occur else we would simply insert a new key.
-			splay(value);
-			if (value > root.getKey()) {
+	public void insert(int value) {		    
+		if (!lookup(value)) {
+			if (root == null)
+				root = new SplayNode(value);
+			else if (value > root.getKey()) {
 				SplayNode tmp = new SplayNode(value);
 				tmp.left = root;
 				tmp.right = root.right;
@@ -163,14 +159,15 @@ public class SplayTree {
 			this.root = concat(t1, t2).root;
 		}
 	}
-   
-	/**
-	*
-    * @param t1
-    * @param t2
-    * @return
-    */
+
+	/*
+	 * 
+	 */
 	public SplayTree concat(SplayTree t1, SplayTree t2) {
+		// check if t2 is empty
+		if (t2 == null)
+			return t1;
+		
 		//splay the first tree around +oo
 		t1.splay(Integer.MAX_VALUE);
 		SplayNode tmpNode = t1.root;
