@@ -1,7 +1,8 @@
 import java.io.PrintStream;
 
 /**
- * 
+ * SplayTree is a self-adjusting binary search tree which bring the most recent
+ * access node as root for faster future access
  * @author Senghuot Lim
  */
 
@@ -9,12 +10,14 @@ public class SplayTree {
 
 	private SplayNode root;
 	private SplayNode splayNode;
+	
 	/**
 	 * @effect construct a new Tree with root sets to null
 	 */
 	public SplayTree() {
 		this(null);
 	}
+	
 	/**
 	* @param root as a root of the tree.
 	* @effect construct a new Tree with user given root.
@@ -140,8 +143,10 @@ public class SplayTree {
 	}
    
 	/**
-	 *
-	*/
+	 * 
+	 * @param key
+	 * @return
+	 */
 	public boolean lookup(int key) {
 		splay(key);
 		return (root != null && key == root.getKey());
@@ -153,15 +158,18 @@ public class SplayTree {
 	 */
 	public void delete(int key) {
 		splay(key);
-		if(root.getKey() == key) {
+		if(root != null && root.getKey() == key) {
 			SplayTree t1 = new SplayTree(root.left);
 			SplayTree t2 = new SplayTree(root.right);
 			this.root = concat(t1, t2).root;
 		}
 	}
 
-	/*
+	/**
 	 * 
+	 * @param t1
+	 * @param t2
+	 * @return
 	 */
 	public SplayTree concat(SplayTree t1, SplayTree t2) {
 		// check if t2 is empty
@@ -181,7 +189,13 @@ public class SplayTree {
 		output.println(command);
 		display(root, "", output);
 	}
-   
+
+	/**
+	 * 
+	 * @param root
+	 * @param inden
+	 * @param output
+	 */
 	private void display(SplayNode root, String inden, PrintStream output) {
 		if (root == null)
 			return;
