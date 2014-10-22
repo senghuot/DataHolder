@@ -91,7 +91,7 @@ public class SplayTree {
 
 		// set our node to be splayed
 		splayNode = root;
-      	return root;
+		return root;
 	}
 	
 	/**
@@ -100,20 +100,18 @@ public class SplayTree {
 	 * @return
 	 */
 	private SplayNode rotate(SplayNode root, char dir) {
-      if (dir == 'l') {
-          SplayNode tmpRoot = root.left;
-          SplayNode subB = tmpRoot.right;
-          root.left = subB;
-          tmpRoot.right = root;
-          root = tmpRoot;
-          return tmpRoot;
-      } else {
-          SplayNode tmpRoot = root.right;
-          SplayNode subB = tmpRoot.left;
-          tmpRoot.left = root;
-          root.right = subB;
-          root = tmpRoot;
-          return tmpRoot;
+		if (dir == 'l') {
+			SplayNode tmpRoot = root.left;
+			SplayNode subB = tmpRoot.right;
+			root.left = subB;
+			tmpRoot.right = root;
+			return tmpRoot;
+		} else {
+			SplayNode tmpRoot = root.right;
+			SplayNode subB = tmpRoot.left;
+			tmpRoot.left = root;
+			root.right = subB;
+			return tmpRoot;
       }
 	} 
 	
