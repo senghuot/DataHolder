@@ -32,10 +32,10 @@ public class SplayTree {
 		if (root == null)
 			return;
 		root = splay(root, key);
-      if (splayNode.getKey() < root.getKey() && root.left != null)
-         root = rotate(root, 'l');
-      else if (splayNode.getKey() > root.getKey() && root.right != null)
-         root = rotate(root, 'r');      
+		if (splayNode.getKey() < root.getKey() && root.left != null)
+			root = rotate(root, 'l');
+		else if (splayNode.getKey() > root.getKey() && root.right != null)
+			root = rotate(root, 'r');      
 		splayNode = null;
 	}
 	
@@ -47,7 +47,7 @@ public class SplayTree {
 	 */
 	private SplayNode splay(SplayNode root, int key) {		
 		// going into left subtree
-      if (key < root.getKey()) {
+		if (key < root.getKey()) {
 			if(root.left == null) {
 				splayNode = root;
 				return root;
@@ -68,14 +68,14 @@ public class SplayTree {
 			}
 
 		// going into right subtree
-      } else if (key > root.getKey()) {
-         if (root.right == null) {
-            splayNode = root;
-            return root;
-         }
+		} else if (key > root.getKey()) {
+			if (root.right == null) {
+				splayNode = root;
+				return root;
+			}
 			// hoop into right subtree
 			root.right = splay(root.right, key);
-         
+
 			// check if current node is a parent
 			if (root.right == splayNode)
 				return root; 
@@ -87,10 +87,11 @@ public class SplayTree {
 				root.right = rotate(root.right, 'l');
 				root = rotate(root, 'r');
 			}
-      }
+		}
 
-      splayNode = root;
-		return root;
+		// set our node to be splayed
+		splayNode = root;
+      	return root;
 	}
 	
 	/**
@@ -144,66 +145,65 @@ public class SplayTree {
 		}
 	}
    
-   /**
-   *
-   */
-   public boolean lookup(int key) {
-      splay(key);
-      return (root != null && key == root.getKey());
-   }
+	/**
+	 *
+	*/
+	public boolean lookup(int key) {
+		splay(key);
+		return (root != null && key == root.getKey());
+	}
    
-   /**
-    * 
-    * @param key
-    */
-   public void delete(int key) {
-	   splay(key);
-	   if(root.getKey() == key) {
-		   SplayTree t1 = new SplayTree(root.left);
-		   SplayTree t2 = new SplayTree(root.right);
-		   this.root = concat(t1, t2).root;
-	   }
-   }
+	/**
+	 * 
+	 * @param key
+	 */
+	public void delete(int key) {
+		splay(key);
+		if(root.getKey() == key) {
+			SplayTree t1 = new SplayTree(root.left);
+			SplayTree t2 = new SplayTree(root.right);
+			this.root = concat(t1, t2).root;
+		}
+	}
    
-   /**
-    * 
+	/**
+	*
     * @param t1
     * @param t2
     * @return
     */
-   public SplayTree concat(SplayTree t1, SplayTree t2) {
-	   // splay the first tree around +oo
-	   t1.splay(Integer.MAX_VALUE);
-	   SplayNode tmpNode = t1.root;
+	public SplayTree concat(SplayTree t1, SplayTree t2) {
+		//splay the first tree around +oo
+		t1.splay(Integer.MAX_VALUE);
+		SplayNode tmpNode = t1.root;
 	   
-	   // then make the second tree the right subtree
-	   tmpNode.right = t2.root;
-	   return new SplayTree(tmpNode);
-   }
+		// then make the second tree the right subtree
+		tmpNode.right = t2.root;
+		return new SplayTree(tmpNode);
+	}
    
-   public void display(String command, PrintStream output) {
-	   output.println(command);
-	   display(root, "", output);
-   }
+	public void display(String command, PrintStream output) {
+		output.println(command);
+		display(root, "", output);
+	}
    
-   private void display(SplayNode root, String inden, PrintStream output) {
-	   if (root == null)
-		   return;
+	private void display(SplayNode root, String inden, PrintStream output) {
+		if (root == null)
+			return;
 	   
-      // print out the root
-      output.println(inden + root.getKey());
+		// print out the root
+		output.println(inden + root.getKey());
       
-	   // print left subtree
-	   if (root.left == null && root.right != null)
-		   output.println(inden + "  -");
-	   else
-		   display(root.left, inden + "  ", output);
+		// print left subtree
+		if (root.left == null && root.right != null)
+			output.println(inden + "  -");
+		else
+			display(root.left, inden + "  ", output);
 
-	   // print right subtree
-	   if (root.left != null && root.right == null)
-		   output.println(inden + "  -");
-	   else
-		   display(root.right, inden + "  ", output);
-   }
-   
+		// print right subtree
+		if (root.left != null && root.right == null)
+			output.println(inden + "  -");
+		else
+			display(root.right, inden + "  ", output);
+	}
 }

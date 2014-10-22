@@ -37,7 +37,7 @@ public class RunDictionary {
 	            }
 				
 				// write out the current state of the tree
-				tree.display(command + num, output);
+				tree.display(command + " " + num, output);
 			}
 			
 			// closing scanner port
