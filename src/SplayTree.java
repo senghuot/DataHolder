@@ -98,9 +98,11 @@ public class SplayTree {
 	}
 	
 	/**
-	 * 
-	 * @param root
-	 * @return
+	 * rotate 'l' means rotate root with left subtree
+	 * rotate 'r' means rotate root with right subtree
+	 * @param root to be rotate
+	 * @param dir direction of the subtree to be rotate
+	 * @return rotated SlayTree
 	 */
 	private SplayNode rotate(SplayNode root, char dir) {
 		if (dir == 'l') {
@@ -143,9 +145,8 @@ public class SplayTree {
 	}
    
 	/**
-	 * 
-	 * @param key
-	 * @return
+	 * @param key for looking up
+	 * @return true iff the key is found. return false otherwise.
 	 */
 	public boolean lookup(int key) {
 		splay(key);
@@ -153,8 +154,8 @@ public class SplayTree {
 	}
    
 	/**
-	 * 
-	 * @param key
+	 * delete a node containing key. ignore if key is not found.
+	 * @param key to be splayed
 	 */
 	public void delete(int key) {
 		splay(key);
@@ -166,8 +167,8 @@ public class SplayTree {
 	}
 
 	/**
-	 * Concating the t1 and t2 under the assumption that the larger element in
-	 * t1 is smaller than the smallest element in t2
+	 * concatenating t1 and t2 while under the assumption that the 
+	 * larger element in t1 is smaller than the smallest element in t2
 	 * @param t1 first SplayTree
 	 * @param t2 second SplayTree
 	 * @return merged SplayTree 
@@ -185,17 +186,23 @@ public class SplayTree {
 		tmpNode.right = t2.root;
 		return new SplayTree(tmpNode);
 	}
-   
+
+	/**
+	 * print out the triggered command and the current stage of the tree based
+	 * on preorder traversal.
+	 * @param command
+	 * @param output
+	 */
 	public void display(String command, PrintStream output) {
 		output.println(command);
 		display(root, "", output);
 	}
 
 	/**
-	 * 
-	 * @param root
-	 * @param inden
-	 * @param output
+	 * helper method for printing out the output t
+	 * @param root, the current node 
+	 * @param inden, the amount of spaces before root output
+	 * @param output,
 	 */
 	private void display(SplayNode root, String inden, PrintStream output) {
 		if (root == null)
