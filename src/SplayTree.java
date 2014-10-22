@@ -166,10 +166,11 @@ public class SplayTree {
 	}
 
 	/**
-	 * 
-	 * @param t1
-	 * @param t2
-	 * @return
+	 * Concating the t1 and t2 under the assumption that the larger element in
+	 * t1 is smaller than the smallest element in t2
+	 * @param t1 first SplayTree
+	 * @param t2 second SplayTree
+	 * @return merged SplayTree 
 	 */
 	public SplayTree concat(SplayTree t1, SplayTree t2) {
 		// check if t2 is empty
