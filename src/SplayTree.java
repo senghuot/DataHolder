@@ -27,6 +27,8 @@ public class SplayTree {
 	 * @param key
 	 */
 	public void splay(int key) {
+		if (root == null)
+			return;
 		root = splay(root, key);
       if (splayNode.getKey() < root.getKey() && root.left != null)
          root = rotate(root, 'l');
@@ -148,5 +150,33 @@ public class SplayTree {
       return (key == root.getKey());
    }
    
+   /**
+    * 
+    * @param key
+    */
+   public void delete(int key) {
+	   splay(key);
+	   if(root.getKey() == key) {
+		   SplayTree t1 = new SplayTree(root.left);
+		   SplayTree t2 = new SplayTree(root.right);
+		   this.root = concat(t1, t2).root;
+	   }
+   }
+   
+   /**
+    * 
+    * @param t1
+    * @param t2
+    * @return
+    */
+   public SplayTree concat(SplayTree t1, SplayTree t2) {
+	   // splay the first tree around +oo
+	   t1.splay(Integer.MAX_VALUE);
+	   SplayNode tmpNode = t1.root;
+	   
+	   // then make the second tree the right subtree
+	   tmpNode.right = t2.root;
+	   return new SplayTree(tmpNode);
+   }
    
 }

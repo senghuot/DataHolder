@@ -21,5 +21,9 @@ public class RunDictionary {
       
       t.lookup(10);
       t.lookup(11);
+      
+      t.delete(11);
+      t.lookup(14);
+      t.delete(14);
    }  
 }
