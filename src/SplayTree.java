@@ -8,6 +8,7 @@ import java.io.PrintStream;
 
 public class SplayTree {
 
+	private int rotations;
 	private SplayNode root;
 	private SplayNode splayNode;
 	
@@ -25,6 +26,7 @@ public class SplayTree {
 	public SplayTree(SplayNode root) {
 		this.root = root;
 		splayNode = null;
+		rotations = 0;
 	}
    
 	/**
@@ -105,6 +107,7 @@ public class SplayTree {
 	 * @return rotated SlayTree
 	 */
 	private SplayNode rotate(SplayNode root, char dir) {
+		rotations++;
 		if (dir == 'l') {
 			SplayNode tmpRoot = root.left;
 			SplayNode subB = tmpRoot.right;
@@ -117,7 +120,7 @@ public class SplayTree {
 			tmpRoot.left = root;
 			root.right = subB;
 			return tmpRoot;
-      }
+		}
 	} 
 	
 	/**
@@ -205,22 +208,19 @@ public class SplayTree {
 	 * @param output,
 	 */
 	private void display(SplayNode root, String inden, PrintStream output) {
-		if (root == null)
+		// print root is "-" if null
+		if (root == null) {
+			output.println(inden + "-");
 			return;
-	   
-		// print out the root
+		}
+			
+		// print out keys the using in-order traversal
 		output.println(inden + root.getKey());
+      if(root.left == null && root.right == null)
+         return;
       
-		// print left subtree
-		if (root.left == null && root.right != null)
-			output.println(inden + "  -");
-		else
-			display(root.left, inden + "  ", output);
-
-		// print right subtree
-		if (root.left != null && root.right == null)
-			output.println(inden + "  -");
-		else
-			display(root.right, inden + "  ", output);
+      // its not a leaf then go left then right subtree   
+		display(root.left, inden + "  ", output);
+		display(root.right, inden + "  ", output);
 	}
 }

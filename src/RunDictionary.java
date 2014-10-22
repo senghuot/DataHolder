@@ -10,17 +10,24 @@ import java.util.*;
 public class RunDictionary {
    
 	public static void main(String[] args) {
+		reads(args);
+	}
+	
+	public static void reads(String[] args) {
 		// throw exception if user doesn't provide correct inputs
- 		if(args.length != 2)
- 			throw new IllegalArgumentException("Please provide correct inputs.");
+ 		//if(args.length != 2)
+ 		//	throw new IllegalArgumentException("Please provide correct inputs.");
 
  		// read and construct a new tree based on input file 
  		SplayTree tree = new SplayTree();
 		try {
 			// preparing input and output files
-			Scanner input = new Scanner(new File(args[0]));
-			PrintStream output = new PrintStream(new File(args[1]));
-			
+         
+         // ***************************************************************** //
+			Scanner input = new Scanner(new File("input.txt"));
+			PrintStream output = new PrintStream(new File("output.txt"));
+			// ***************************************************************** //
+         
 			// loop over the input file
 			while (input.hasNextLine()) {
 				String command = input.next();
@@ -45,5 +52,11 @@ public class RunDictionary {
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found.");
 		}
-	}  
+	}
+	
+	public static void tests() {
+		for (int ) {
+      
+      }
+	}
 }
