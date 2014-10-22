@@ -1,1 +1,1 @@
-CSE 333 is also known as Data Structure and Algorithm at University of Washington.
+This is where I implement a bunch of data structures from scratch.
