@@ -45,5 +45,5 @@ public class RunDictionary {
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found.");
 		}
-   }  
+	}  
 }
