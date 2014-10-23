@@ -9,8 +9,10 @@ import java.util.*;
  */
 public class RunDictionary {
    
+	public static final int POWER = 20;
+	
 	public static void main(String[] args) {
-		reads(args);
+		tests();
 	}
 	
 	public static void reads(String[] args) {
@@ -55,8 +57,27 @@ public class RunDictionary {
 	}
 	
 	public static void tests() {
-		for (int ) {
-      
-      }
+		SplayTree tree = new SplayTree();
+		Random rand = new Random();
+
+		// automatic testing
+		System.out.println("N\t M\t T\t");
+		for (int i = 0; i <= POWER; i++) {
+			int n = (int)Math.pow(2, i);
+			int m = 2 * n;
+			
+			// inserting nodes into our tree
+			for (int j = 0; j < n; j++)
+				tree.insert(j);
+
+			// lookup nodes using our tree
+			for (int k = n; k < m; k++) {
+				int num = rand.nextInt(n + 1) + 1;
+				tree.lookup(num);
+			}
+			System.out.print(n);
+			System.out.print("\t " + m);
+			System.out.println("\t " + tree.getRotations());      
+		}
 	}
 }

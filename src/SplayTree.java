@@ -223,4 +223,10 @@ public class SplayTree {
 		display(root.left, inden + "  ", output);
 		display(root.right, inden + "  ", output);
 	}
+	
+	public int getRotations() {
+		int tmp = rotations;
+		rotations = 0;
+		return tmp;
+	}
 }
