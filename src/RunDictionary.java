@@ -12,8 +12,8 @@ public class RunDictionary {
 	public static final int POWER = 20;
 	
 	public static void main(String[] args) throws FileNotFoundException {
-		reads(args);
-		// tests();
+		// reads(args);
+		tests();
 	}
 	
 	/**
@@ -83,7 +83,7 @@ public class RunDictionary {
 
 			// lookup nodes using our tree
 			for (int k = n; k < m; k++) {
-				int num = rand.nextInt(n + 1) + 1;
+				int num = rand.nextInt(n + 1);
 				tree.lookup(num);
 			}
 			System.out.print(n);
