@@ -12,6 +12,7 @@ public class RunDictionary {
 	public static final int POWER = 20;
 	
 	public static void main(String[] args) {
+		reads(args);
 		tests();
 	}
 	
@@ -55,6 +56,9 @@ public class RunDictionary {
 		}
 	}
 	
+	/**
+	 *  to run some experiments testing the performance of the splay tree.  
+	 */
 	public static void tests() {
 		SplayTree tree = new SplayTree();
 		Random rand = new Random();
