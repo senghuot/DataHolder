@@ -6,7 +6,6 @@ its original height. However, continuation to Lookup(2)...Lookup(n) will put the
 its original state before any Lookup() operations.
 
 #3b.
-After N insertion follow by M-N operations, a straight line produce; y = 0.7535x + 3.2812.
-The constant slope is 0.7535.
-
+Using data from N insertions follow by M-N lookups, a straight line produce; y = 0.7535x + 3.2812.
+The constant C is about 0.7535.
 

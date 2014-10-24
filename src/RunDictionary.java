@@ -11,16 +11,18 @@ public class RunDictionary {
    
 	public static final int POWER = 20;
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws FileNotFoundException {
 		reads(args);
-		//tests();
+		// tests();
 	}
 	
 	/**
-	 * 
-	 * @param args inputs contains input and output filename
+	 * reading input file contains insert, delete, lookup command.
+	 * if unknown command appears then exit the program.
+	 * @param args contains input and output filename
+	 * @throws FileNotFoundException if input file does not exist 
 	 */
-	public static void reads(String[] args) {
+	public static void reads(String[] args) throws FileNotFoundException {
 		// throw exception if user doesn't provide correct inputs
  		if(args.length != 2)
  			throw new IllegalArgumentException("Please provide correct inputs.");
@@ -57,7 +59,7 @@ public class RunDictionary {
 			input.close();
 			output.close();
 		} catch (FileNotFoundException e) {
-			System.out.println("File not found.");
+			throw new FileNotFoundException("File does not exist.");
 		}
 	}
 	
