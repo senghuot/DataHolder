@@ -9,6 +9,7 @@ import java.util.*;
  */
 public class RunDictionary {
    
+	// acts as the power, of 2^POWER. used for testing. Anything above 20 will slow down significantly.
 	public static final int POWER = 20;
 	
 	public static void main(String[] args) throws FileNotFoundException {

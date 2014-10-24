@@ -8,9 +8,9 @@ import java.io.PrintStream;
 
 public class SplayTree {
 
-	private int rotations;
-	private SplayNode root;
-	private SplayNode splayNode;
+	private int rotations;		// keep track of the number of single tree rotations
+	private SplayNode root;		// root of the tree
+	private SplayNode splayNode;// node to be splayed on
 	
 	/**
 	 * @effect construct a new Tree with root sets to null
@@ -223,6 +223,9 @@ public class SplayTree {
 		display(root.right, inden + "  ", output);
 	}
 	
+	/**
+	 * @return int number of rotation of a single tree. 
+	 */
 	public int getRotations() {
 		int tmp = rotations;
 		rotations = 0;
