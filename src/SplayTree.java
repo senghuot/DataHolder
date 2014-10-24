@@ -30,8 +30,7 @@ public class SplayTree {
 	}
    
 	/**
-	 * 
-	 * @param key
+	 * @param key to be splayed
 	 */
 	public void splay(int key) {
 		if (root == null)
@@ -45,8 +44,8 @@ public class SplayTree {
 	}
 	
 	/**
-	 * 
-	 * @param root
+	 * helper method to splay the tree based on input key
+	 * @param root the current root to be splayed
 	 * @param key
 	 * @return
 	 */

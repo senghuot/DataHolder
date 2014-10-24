@@ -13,9 +13,13 @@ public class RunDictionary {
 	
 	public static void main(String[] args) {
 		reads(args);
-		tests();
+		//tests();
 	}
 	
+	/**
+	 * 
+	 * @param args inputs contains input and output filename
+	 */
 	public static void reads(String[] args) {
 		// throw exception if user doesn't provide correct inputs
  		if(args.length != 2)
@@ -49,15 +53,17 @@ public class RunDictionary {
 				tree.display(command + " " + num, output);
 			}
 			
-			// closing scanner port
+			// closing scanner and output ports
 			input.close();
+			output.close();
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found.");
 		}
 	}
 	
 	/**
-	 *  to run some experiments testing the performance of the splay tree.  
+	 *  to run some experiments testing the performance of the splay tree.
+	 *  We're hoping to exploit the O(n) run time despite the amortized O(log n). 
 	 */
 	public static void tests() {
 		SplayTree tree = new SplayTree();
