@@ -205,7 +205,7 @@ public class SplayTree {
 	 * helper method for printing out the output t
 	 * @param root, the current node 
 	 * @param inden, the amount of spaces before root output
-	 * @param output,
+	 * @param output, 
 	 */
 	private void display(SplayNode root, String inden, PrintStream output) {
 		// print root is "-" if null
@@ -216,10 +216,10 @@ public class SplayTree {
 			
 		// print out keys the using in-order traversal
 		output.println(inden + root.getKey());
-      if(root.left == null && root.right == null)
-         return;
+		if(root.left == null && root.right == null)
+			return;
       
-      // its not a leaf then go left then right subtree   
+		// its not a leaf then go left then right subtree   
 		display(root.left, inden + "  ", output);
 		display(root.right, inden + "  ", output);
 	}

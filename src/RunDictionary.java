@@ -50,7 +50,7 @@ public class RunDictionary {
 	            	tree.lookup(num);
 				else {
 	            	output.println("Unkown command line");
-	            	return;
+	            	System.exit(1);
 				}
 				
 				// write out the current state of the tree
