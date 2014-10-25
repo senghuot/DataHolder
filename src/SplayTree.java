@@ -106,7 +106,8 @@ public class SplayTree {
 	 * @return rotated SlayTree
 	 */
 	private SplayNode rotate(SplayNode root, char dir) {
-		rotations++;
+		// enable for testing mode only 
+		// rotations++;
 		if (dir == 'l') {
 			SplayNode tmpRoot = root.left;
 			SplayNode subB = tmpRoot.right;

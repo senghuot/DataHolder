@@ -13,8 +13,9 @@ public class RunDictionary {
 	public static final int POWER = 20;
 	
 	public static void main(String[] args) throws FileNotFoundException {
-		// reads(args);
-		tests();
+		reads(args);
+		// enable for testing mode only 
+		// tests();
 	}
 	
 	/**
@@ -45,12 +46,12 @@ public class RunDictionary {
 					tree.insert(num);
 				else if (command.equals("delete"))
 					tree.delete(num);
-	            else if (command.equals("lookup"))
+				else if (command.equals("lookup"))
 	            	tree.lookup(num);
-	            else {
+				else {
 	            	output.println("Unkown command line");
 	            	return;
-	            }
+				}
 				
 				// write out the current state of the tree
 				tree.display(command + " " + num, output);

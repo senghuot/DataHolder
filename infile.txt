@@ -1,3 +1,4 @@
+badinput 1
 insert 8
 insert 6
 insert 7
