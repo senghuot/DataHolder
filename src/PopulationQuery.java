@@ -66,6 +66,8 @@ public class PopulationQuery {
 		test[3] = "-v1";
 		args = test;
 		
+		CensusData data = parse("CenPop2010.txt");
+		
 		// shut down the problem if user doesn't provide at least 4 arguments
 		if (args.length < 4)
 			System.exit(0);
@@ -73,7 +75,9 @@ public class PopulationQuery {
 		// performing our user inputs
 		Scanner scanner = new Scanner(System.in);
 		do {
-			System.out.println();
-		} while(true);
+			System.out.println("Please give west, south, east, north coordinates of your query");
+			
+			
+		} while(false);
 	}
 }
