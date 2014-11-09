@@ -1,3 +1,4 @@
+package hw4;
 
 /**
  * Act as a storage for each node of a tree. Each node is a data structure consisting of

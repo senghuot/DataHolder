@@ -1,4 +1,4 @@
-package hw1;
+package hw2;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;

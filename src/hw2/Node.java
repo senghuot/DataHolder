@@ -1,4 +1,4 @@
-package hw1;
+package hw2;
 /**
  * Act as a storage for each node of a tree.
  * @author senghuot
