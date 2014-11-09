@@ -1,4 +1,4 @@
-
+import java.util.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -57,6 +57,23 @@ public class PopulationQuery {
 	// argument 3: number of y-dimension buckets
 	// argument 4: -v1, -v2, -v3, -v4, or -v5
 	public static void main(String[] args) {
-		System.out.println("Hello World");
+		
+		// this is for testing purpose redirection only
+		String[] test = new String[4];
+		test[0] = "CenPop2010.txt";
+		test[1] = "100";
+		test[2] = "50";
+		test[3] = "-v1";
+		args = test;
+		
+		// shut down the problem if user doesn't provide at least 4 arguments
+		if (args.length < 4)
+			System.exit(0);
+		
+		// performing our user inputs
+		Scanner scanner = new Scanner(System.in);
+		do {
+			System.out.println();
+		} while(true);
 	}
 }
