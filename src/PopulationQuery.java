@@ -59,78 +59,48 @@ public class PopulationQuery {
 	public static void main(String[] args) {
 		
 		// this is for testing purpose redirection only
-		String[] test = new String[4];
-		test[0] = "CenPop2010.txt";
-		test[1] = "100";
-		test[2] = "50";
-		test[3] = "-v1";
+		String[] test = new String[5];
+		test[1] = "CenPop2010.txt";
+		test[2] = "100";
+		test[3] = "500";
+		test[4] = "-v1";
 		args = test;
 		
 		// shut down the problem if user doesn't provide at least 4 arguments
 		if (args.length < 4)
 			System.exit(0);
 		
+		// parsing to get X & Y coordinates
+		int x = Integer.parseInt(args[2]);
+		int y = Integer.parseInt(args[3]);
+		
 		// might have to re-design the class. possibly having a superclass then
-		// four different version of class
-		if (args[3].equals("-v1")) {
-			CensusData census = parse(args[0]);
+		// four different version of class 
+		if (args[4].equals("-v1")) {
+			CensusData census = parse(args[1]);
+			VersionI v1 = new VersionI(census, x, y);
 			Scanner console = new Scanner(System.in);
 			
 			// break and read the input from user.
-			int[][] pop = getCensusGrid(100, 500, census);
 			System.out.println("Please give west, south, east, north coordinates of your query");
 			String[] input = console.nextLine().split(" ");
 			while (input.length == 4) {
-				int minX = Integer.parseInt(input[0]) - 1;
-				int maxX = Integer.parseInt(input[2]);
-				int minY = Integer.parseInt(input[1]) - 1;
-				int maxY = Integer.parseInt(input[3]);
+				int west = Integer.parseInt(input[0]);
+				int south = Integer.parseInt(input[1]);
+				int east = Integer.parseInt(input[2]);
+				int north = Integer.parseInt(input[3]);
 				
-				int total = 0;
-				for (int i=minX; i<maxX; i++) {
-					for (int j=minY; j<maxY; j++)
-						total += pop[i][j];
-				}
-				System.out.println(total);
+            v1.query(west, south, east, north); 
 				
 				System.out.println("Please give west, south, east, north coordinates of your query");
 				input = console.nextLine().split(" ");
 			}
-		}
-	}
-	
-	/**
-	 * create a two dimensional array of int for storing population
-	 */
-	public static int[][] getCensusGrid(int x, int y, CensusData census) {
-		int[][] grid = new int[x][y];
-		
-		// find the Min/Max for longitude and latitude 
-		if (census.data_size > 0) {
-			float minX = census.data[0].latitude; 
-			float maxX = census.data[0].latitude;
-			float minY = census.data[0].longitude;
-			float maxY = census.data[0].longitude;
-
-			for (int i = 1; i < census.data_size; i++) {
-				minX = Math.min(minX, census.data[i].latitude);
-				maxX = Math.max(maxX, census.data[i].latitude);
-				minY = Math.min(minY, census.data[i].longitude);
-				maxY = Math.max(maxY, census.data[i].longitude);
-			}
+		} else if (args[4].equals("-v2")) {
 			
-			// inserting the population into the population grid
-			float widthX = (maxX - minX) / x;
-			float widthY = (maxY - minY) / y;
-			for (int i = 0; i < census.data_size; i++) {
-				int gridX = (int) Math.ceil((census.data[i].latitude - minX) / widthX);
-				int gridY = (int) Math.ceil((census.data[i].longitude - minY) / widthY);
-				gridX = Math.min(gridX, x - 1);
-				gridY = Math.min(gridY, y - 1);
-				grid[gridX][gridY] += census.data[i].population;
-			}
+		} else if (args[4].equals("-v3")) {
+			
+		} else if (args[4].equals("-v4")) {
+			
 		}
-
-		return grid;
 	}
 }
