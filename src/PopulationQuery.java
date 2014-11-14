@@ -70,37 +70,37 @@ public class PopulationQuery {
 		if (args.length < 4)
 			System.exit(0);
 		
-		// parsing to get X & Y coordinates
+		// parsing to get X & Y coordinates and other variable
 		int x = Integer.parseInt(args[2]);
 		int y = Integer.parseInt(args[3]);
-		
+		CensusData census = parse(args[1]);
+      
 		// might have to re-design the class. possibly having a superclass then
-		// four different version of class 
+		// four different version of class
+		Version v = null;
 		if (args[4].equals("-v1")) {
-			CensusData census = parse(args[1]);
-			VersionI v1 = new VersionI(census, x, y);
-			Scanner console = new Scanner(System.in);
-			
-			// break and read the input from user.
-			System.out.println("Please give west, south, east, north coordinates of your query");
-			String[] input = console.nextLine().split(" ");
-			while (input.length == 4) {
-				int west = Integer.parseInt(input[0]);
-				int south = Integer.parseInt(input[1]);
-				int east = Integer.parseInt(input[2]);
-				int north = Integer.parseInt(input[3]);
-				
-            v1.query(west, south, east, north); 
-				
-				System.out.println("Please give west, south, east, north coordinates of your query");
-				input = console.nextLine().split(" ");
-			}
+			v = new VersionI(census, x, y);
 		} else if (args[4].equals("-v2")) {
-			
+			v = new VersionII(census, x, y);
 		} else if (args[4].equals("-v3")) {
+			v = new VersionIII(census, x, y);
+		} else if (args[4].equals("-v4")) {}
 			
-		} else if (args[4].equals("-v4")) {
-			
+      Scanner console = new Scanner(System.in);
+
+	   // break and read the input from user.
+		System.out.println("Please give west, south, east, north coordinates of your query");
+		String[] input = console.nextLine().split(" ");
+		while (input.length == 4) {
+			int west = Integer.parseInt(input[0])	- 1;
+			int south = Integer.parseInt(input[1]) 	- 1;
+			int east = Integer.parseInt(input[2]) 	- 1;
+			int north = Integer.parseInt(input[3]) 	- 1;
+
+			v.query(west, south, east, north); 
+
+			System.out.println("Please give west, south, east, north coordinates of your query");
+			input = console.nextLine().split(" ");
 		}
 	}
 }
