@@ -61,9 +61,9 @@ public class PopulationQuery {
 		// this is for testing purpose redirection only
 		String[] test = new String[5];
 		test[1] = "CenPop2010.txt";
-		test[2] = "100";
-		test[3] = "500";
-		test[4] = "-v1";
+		test[2] = "5";
+		test[3] = "10";
+		test[4] = "-v4";
 		args = test;
 		
 		// shut down the problem if user doesn't provide at least 4 arguments
@@ -79,23 +79,25 @@ public class PopulationQuery {
 		// four different version of class
 		Version v = null;
 		if (args[4].equals("-v1")) {
-			v = new VersionI(census, x, y);
+			v = new Version1(census, x, y);
 		} else if (args[4].equals("-v2")) {
-			v = new VersionII(census, x, y);
+			v = new Version2(census, x, y);
 		} else if (args[4].equals("-v3")) {
-			v = new VersionIII(census, x, y);
-		} else if (args[4].equals("-v4")) {}
+			v = new Version3(census, x, y);
+		} else if (args[4].equals("-v4")) {
+         v = new Version4(census, x, y);
+      }
 			
-      Scanner console = new Scanner(System.in);
+		Scanner console = new Scanner(System.in);
 
-	   // break and read the input from user.
+		// break and read the input from user.
 		System.out.println("Please give west, south, east, north coordinates of your query");
 		String[] input = console.nextLine().split(" ");
 		while (input.length == 4) {
-			int west = Integer.parseInt(input[0])	- 1;
-			int south = Integer.parseInt(input[1]) 	- 1;
-			int east = Integer.parseInt(input[2]) 	- 1;
-			int north = Integer.parseInt(input[3]) 	- 1;
+			int west = Integer.parseInt(input[0]) - 1;
+			int south = Integer.parseInt(input[1]) - 1;
+			int east = Integer.parseInt(input[2]) - 1;
+			int north = Integer.parseInt(input[3]) - 1;
 
 			v.query(west, south, east, north); 
 

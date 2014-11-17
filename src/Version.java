@@ -15,7 +15,5 @@ public abstract class Version {
 		this.y = y;
 	}
 	
-	private void init() {}
-	
-	public void query(int west, int south, int east, int north) {}
+	public abstract void query(int west, int south, int east, int north);
 }

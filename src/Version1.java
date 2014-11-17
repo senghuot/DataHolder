@@ -1,25 +1,25 @@
 
-public class VersionI extends Version{
+public class Version1 extends Version{
 	
-	public VersionI(CensusData census, int x, int y) {
+	public Version1(CensusData census, int x, int y) {
 		super(census, x, y);
 		init();
 	}
 	
-	private void init() {
+	public void init() {
 		if (census.data_size > 0) {
-			minY = census.data[0].latitude; 
-			maxY = census.data[0].latitude;
-			minX = census.data[0].longitude;
-			maxX = census.data[0].longitude;
+			minX = census.data[0].latitude; 
+			maxX = census.data[0].latitude;
+			minY = census.data[0].longitude;
+			maxY = census.data[0].longitude;
 			
 			// set population
 			population += census.data[0].population;
 			for (int i = 1; i < census.data_size; i++) {
-				minY = Math.min(minY, census.data[i].latitude);
-				maxY = Math.max(maxY, census.data[i].latitude);
-				minX = Math.min(minX, census.data[i].longitude);
-				maxX = Math.max(maxX, census.data[i].longitude);
+				minX = Math.min(minX, census.data[i].latitude);
+				maxX = Math.max(maxX, census.data[i].latitude);
+				minY = Math.min(minY, census.data[i].longitude);
+				maxY = Math.max(maxY, census.data[i].longitude);
 				population += census.data[i].population;
          }
 		}
@@ -45,8 +45,8 @@ public class VersionI extends Version{
 		float widthX = (maxX - minX) / x;
 		float widthY = (maxY - minY) / y;
 		
-		int currX = (int)((census.longitude - minX) / widthX);
-		int currY = (int)((census.latitude - minY) / widthY);
+		int currX = (int)((census.latitude - minX) / widthX);
+		int currY = (int)((census.longitude - minY) / widthY);
 
 		currX = Math.min(currX, x - 1);
 		currY = Math.min(currY, y - 1);

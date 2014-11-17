@@ -1,15 +1,16 @@
 
-public class VersionIII extends VersionI {
+public class Version3 extends Version1 {
 
 	private int[][] popGrid;
 	
-	public VersionIII(CensusData census, int x, int y) {
+	public Version3(CensusData census, int x, int y) {
 		super(census, x, y);
 		fillPopGrid();
 	}
 	
     public void query(int west, int south, int east, int north) {
       int total = popGrid[east][north];
+      
       // remove top
       if (south - 1 >= 0)
          total -= popGrid[east][south - 1];
@@ -37,8 +38,8 @@ public class VersionIII extends VersionI {
 		// read the population into population grid
 		for (int i = 0; i < census.data_size; i++) {
 			// calculate out the index
-			indexX = (int)((census.data[i].longitude - minX) / widthX);
-			indexY = (int)((census.data[i].latitude - minY) / widthY);
+			indexX = (int)((census.data[i].latitude - minX) / widthX);
+			indexY = (int)((census.data[i].longitude - minY) / widthY);
 			indexX = Math.min(indexX, x - 1);
 			indexY = Math.min(indexY, y - 1);
 			
@@ -49,18 +50,17 @@ public class VersionIII extends VersionI {
 		// convert population grid into cumulative grid
 		for (int i = 0; i < x; i++) {
 			for (int j = 0; j < y; j++) {
-            int total = popGrid[i][j];
-            // grab top
-            if (j - 1 >= 0)
-               total += popGrid[i][j -1];
-            // grab left
-            if (i - 1 >= 0)
-               total += popGrid[i-1][j];
-            // remove top left
-            if (j - 1 >=0 && i - 1 >= 0)
-               total -= popGrid[i -1][j - 1];
-          
-            popGrid[i][j] = total;
+	            int total = popGrid[i][j];
+	            // grab top
+	            if (j - 1 >= 0)
+	               total += popGrid[i][j -1];
+	            // grab left
+	            if (i - 1 >= 0)
+	               total += popGrid[i-1][j];
+	            if (j - 1 >=0 && i - 1 >= 0)
+	               total -= popGrid[i -1][j - 1];
+	          
+	            popGrid[i][j] = total;
 			}
 		} 
 	}
