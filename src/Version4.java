@@ -1,7 +1,7 @@
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.ForkJoinTask;
 
-public class Version4 extends Version2{
+public class Version4 extends Version2 {
 	
 	private int[][] popGrid;
 	public static final ForkJoinPool fjPool = new ForkJoinPool();
@@ -29,6 +29,10 @@ public class Version4 extends Version2{
 	}
 
     public void query(int west, int south, int east, int north) {
+    	west--;
+    	south--;
+    	east--;
+    	north--;
         int total = popGrid[east][north];
         
         // remove top

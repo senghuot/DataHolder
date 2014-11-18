@@ -19,10 +19,10 @@ public class Version2Init extends RecursiveTask<Rectangle> {
 	    Rectangle ans = new Rectangle(0, 0, 0, 0, 0);
         if (hi - lo < SEQUENCTIAL_CUTOFF) {
             if (hi - lo > 0) {
-            	ans.left = census.data[lo].latitude; 
-      			ans.right = census.data[lo].latitude;
-      			ans.bottom = census.data[lo].longitude;
-      			ans.top = census.data[lo].longitude;
+            	ans.left = census.data[lo].longitude; 
+      			ans.right = census.data[lo].longitude;
+      			ans.bottom = census.data[lo].latitude;
+      			ans.top = census.data[lo].latitude;
       			ans.population += census.data[lo].population;
                
       			for (int i = lo + 1; i < hi; i++) {
@@ -30,10 +30,10 @@ public class Version2Init extends RecursiveTask<Rectangle> {
       				ans.population += tmp.population;
    				
       				// calculating the bound
-      				ans.left = Math.min(ans.left, tmp.latitude);
-      				ans.right = Math.max(ans.right, tmp.latitude);
-      				ans.top = Math.max(ans.top, tmp.longitude);
-      				ans.bottom = Math.min(ans.bottom, tmp.longitude);
+      				ans.left = Math.min(ans.left, tmp.longitude);
+      				ans.right = Math.max(ans.right, tmp.longitude);
+      				ans.top = Math.max(ans.top, tmp.latitude);
+      				ans.bottom = Math.min(ans.bottom, tmp.latitude);
       			}
             }   
 			return ans;

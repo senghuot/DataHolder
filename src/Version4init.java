@@ -1,3 +1,4 @@
+import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveTask;
 
 public class Version4init extends RecursiveTask<int[][]> {
@@ -8,6 +9,7 @@ public class Version4init extends RecursiveTask<int[][]> {
 	private Rectangle rec;
 	private CensusData census;
 	
+	public static final ForkJoinPool fjPool = new ForkJoinPool();
 	public static final int SEQUENCTIAL_CUTOFF = 1000;
 	public Version4init(int l, int h, int x, int y, Rectangle r, CensusData c) {
 		census = c;
@@ -31,8 +33,8 @@ public class Version4init extends RecursiveTask<int[][]> {
     		
         	for (int i = lo; i < hi; i++) {
         		// calculate out the index
-    			indexX = (int)((census.data[i].latitude - rec.left) / widthX);
-    			indexY = (int)((census.data[i].longitude - rec.bottom) / widthY);
+    			indexX = (int)((census.data[i].longitude - rec.left) / widthX);
+    			indexY = (int)((census.data[i].latitude - rec.bottom) / widthY);
     			indexX = Math.min(indexX, x - 1);
     			indexY = Math.min(indexY, y - 1);
     			
@@ -46,6 +48,9 @@ public class Version4init extends RecursiveTask<int[][]> {
    			left.fork();
    			int[][] rightAns = right.compute();
    			int[][] leftAns = left.join();
+
+   			// int loX, int hiX, int loY, int hiY, int[][] le, int[][] ri
+   		   fjPool.invoke(new Version4Combine(0, x, 0, y, leftAns, rightAns));
             
    			return leftAns;
    		}

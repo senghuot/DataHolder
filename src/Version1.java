@@ -1,5 +1,5 @@
 
-public class Version1 extends Version{
+public class Version1 extends Version {
 	
 	public Version1(CensusData census, int x, int y) {
 		super(census, x, y);
@@ -28,8 +28,7 @@ public class Version1 extends Version{
 	public void query(int west, int south, int east, int north) {
 		int currPop = getPopulation(west, south, east, north);
 		double ratio = (100.0 * currPop) / population;
-		System.out.println("population of rectangle: " + currPop);
-		System.out.printf("percent of total: %.2f \n", ratio);
+		print(currPop, ratio);
 	}
    
 	private int getPopulation(int west, int south, int east, int north) {
@@ -42,14 +41,14 @@ public class Version1 extends Version{
 	
    // pass Inclusive X and Y bound chunks - 1 based indexing.
 	private boolean contains(CensusGroup census, int west, int south, int east, int north) {
-      // calculate the width of a chunk for x and y
+		// calculate the width of a chunk for x and y
 		float widthXChunk = (maxX - minX) / x;
 		float widthYChunk = (maxY - minY) / y;
 
-      float boundWest = (west - 1) * widthXChunk + minX;
-      float boundEast = (east) * widthXChunk + minX;
-      float boundSouth = (south - 1) * widthYChunk + minY;
-      float boundNorth = (north) * widthYChunk + minY;
+		float boundWest = (west - 1) * widthXChunk + minX;
+		float boundEast = (east) * widthXChunk + minX;
+		float boundSouth = (south - 1) * widthYChunk + minY;
+		float boundNorth = (north) * widthYChunk + minY;
       
 		return(census.longitude >= boundWest && census.longitude <= boundEast &&
                census.latitude >= boundSouth && census.latitude <= boundNorth); 

@@ -9,6 +9,11 @@ public class Version3 extends Version1 {
 	}
 	
     public void query(int west, int south, int east, int north) {
+      // convert the query coordinate to base zero
+      west--;
+      south--;
+      east--;
+      north--;
       int total = popGrid[east][north];
       
       // remove top
@@ -22,8 +27,7 @@ public class Version3 extends Version1 {
          total += popGrid[west - 1][south - 1];
       
       double ratio = (100.0 * total) / population;
-      System.out.println("population of rectangle: " + total);
-      System.out.printf("percent of total: %.2f \n", ratio);
+      print(total, ratio);
    }
 
 	private void fillPopGrid() {
@@ -38,8 +42,8 @@ public class Version3 extends Version1 {
 		// read the population into population grid
 		for (int i = 0; i < census.data_size; i++) {
 			// calculate out the index
-			indexX = (int)((census.data[i].latitude - minX) / widthX);
-			indexY = (int)((census.data[i].longitude - minY) / widthY);
+			indexX = (int)((census.data[i].longitude - minX) / widthX);
+			indexY = (int)((census.data[i].latitude - minY) / widthY);
 			indexX = Math.min(indexX, x - 1);
 			indexY = Math.min(indexY, y - 1);
 			

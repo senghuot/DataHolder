@@ -63,7 +63,7 @@ public class PopulationQuery {
 		test[1] = "CenPop2010.txt";
 		test[2] = "100";
 		test[3] = "500";
-		test[4] = "-v1";
+		test[4] = "-v4";
 		args = test;
 		
 		// shut down the problem if user doesn't provide at least 4 arguments
@@ -101,7 +101,7 @@ public class PopulationQuery {
 
 			v.query(west, south, east, north); 
 
-			System.out.println("Please give west, south, east, north coordinates of your query");
+			System.out.println("Please1 give west, south, east, north coordinates of your query");
 			input = console.nextLine().split(" ");
 		}
 	}

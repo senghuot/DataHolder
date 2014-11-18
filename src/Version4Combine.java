@@ -35,7 +35,15 @@ public class Version4Combine extends RecursiveAction {
 			Version4Combine topRight = new Version4Combine(halfX , highX, halfY, highY, left, right);
 			// bottom halves
 			Version4Combine bottomLeft = new Version4Combine(lowX, halfX, lowY, halfY, left, right);
-			Version4Combine bottomRight = new Version4Combine(halfX, highX, halfY, highY, left, right);
+			Version4Combine bottomRight = new Version4Combine(halfX, highX, lowY, halfY, left, right);
+			
+			topLeft.fork();
+			topRight.fork();
+			bottomLeft.fork();
+			bottomRight.compute();
+			topLeft.join();
+			topRight.join();
+			bottomLeft.join();
 		}
 	}
 }

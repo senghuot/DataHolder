@@ -15,5 +15,10 @@ public abstract class Version {
 		this.y = y;
 	}
 	
+	public void print(int currPop, double ratio) {
+		System.out.println("population of rectangle: " + currPop);
+		System.out.printf("percent of total: %.2f \n", ratio);		
+	}
+	
 	public abstract void query(int west, int south, int east, int north);
 }
