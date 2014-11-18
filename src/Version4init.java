@@ -46,9 +46,7 @@ public class Version4init extends RecursiveTask<int[][]> {
    			left.fork();
    			int[][] rightAns = right.compute();
    			int[][] leftAns = left.join();
-   			for (int i = 0; i < x; i++)
-   				for (int j = 0; j < y; j++)
-   					leftAns[i][j] += rightAns[i][j];
+            
    			return leftAns;
    		}
 	}

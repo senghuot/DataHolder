@@ -61,9 +61,9 @@ public class PopulationQuery {
 		// this is for testing purpose redirection only
 		String[] test = new String[5];
 		test[1] = "CenPop2010.txt";
-		test[2] = "5";
-		test[3] = "10";
-		test[4] = "-v4";
+		test[2] = "100";
+		test[3] = "500";
+		test[4] = "-v1";
 		args = test;
 		
 		// shut down the problem if user doesn't provide at least 4 arguments
@@ -94,10 +94,10 @@ public class PopulationQuery {
 		System.out.println("Please give west, south, east, north coordinates of your query");
 		String[] input = console.nextLine().split(" ");
 		while (input.length == 4) {
-			int west = Integer.parseInt(input[0]) - 1;
-			int south = Integer.parseInt(input[1]) - 1;
-			int east = Integer.parseInt(input[2]) - 1;
-			int north = Integer.parseInt(input[3]) - 1;
+			int west = Integer.parseInt(input[0]);
+			int south = Integer.parseInt(input[1]);
+			int east = Integer.parseInt(input[2]);
+			int north = Integer.parseInt(input[3]);
 
 			v.query(west, south, east, north); 
 
