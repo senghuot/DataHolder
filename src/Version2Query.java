@@ -26,9 +26,8 @@ public class Version2Query extends RecursiveTask<Integer> {
 		if (hi - lo < SEQUENCTIAL_CUTOFF) {
 			int res = 0;
 			for (int i = lo; i < hi; i++) {
-				CensusGroup tmp = census.data[i];
-				if (contains(tmp))
-					res += tmp.population;
+				if (Version1s.contains(census.data[i], rec, queryRec, x, y))
+					res += census.data[i].population;
 			}
 			return res;
 		} else {
@@ -39,19 +38,5 @@ public class Version2Query extends RecursiveTask<Integer> {
 			int leftAns = left.join();
 			return rightAns + leftAns;
 		}
-	}
-	
-	private boolean contains(CensusGroup census) {		
-		// calculate the width of a chunk for x and y
-		float widthXChunk = (rec.right - rec.left) / x;
-		float widthYChunk = (rec.top - rec.bottom) / y;
-
-		float boundWest = (queryRec.left - 1) * widthXChunk + rec.left;
-		float boundEast = queryRec.right * widthXChunk + rec.left;
-		float boundSouth = (queryRec.bottom - 1) * widthYChunk + rec.bottom;
-		float boundNorth = queryRec.top * widthYChunk + rec.bottom;
-      
-		return(census.longitude >= boundWest && census.longitude <= boundEast &&
-               census.latitude >= boundSouth && census.latitude <= boundNorth);
 	}
 }
