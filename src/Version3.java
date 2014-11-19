@@ -25,25 +25,24 @@ public class Version3 extends Version1 {
       // add some of it back in
       if (south - 1 >=0 && west - 1 >= 0)
          total += popGrid[west - 1][south - 1];
-      
-      double ratio = (100.0 * total) / population;
-      print(total, ratio);
+
+      print(total);
    }
 
 	private void fillPopGrid() {
 		popGrid = new int[x][y];
 		
 		// get the width of each grid in X and Y
-		float widthX = (maxX - minX) / x;
-		float widthY = (maxY - minY) / y;
+		float widthX = (rec.right - rec.left) / x;
+		float widthY = (rec.top - rec.bottom) / y;
 		int indexX;
 		int indexY;
 		
 		// read the population into population grid
 		for (int i = 0; i < census.data_size; i++) {
 			// calculate out the index
-			indexX = (int)((census.data[i].longitude - minX) / widthX);
-			indexY = (int)((census.data[i].latitude - minY) / widthY);
+			indexX = (int)((census.data[i].longitude - rec.left) / widthX);
+			indexY = (int)((census.data[i].latitude - rec.bottom) / widthY);
 			indexX = Math.min(indexX, x - 1);
 			indexY = Math.min(indexY, y - 1);
 			

@@ -49,9 +49,7 @@ public class Version4init extends RecursiveTask<int[][]> {
    			int[][] rightAns = right.compute();
    			int[][] leftAns = left.join();
 
-   			// int loX, int hiX, int loY, int hiY, int[][] le, int[][] ri
-   		   fjPool.invoke(new Version4Combine(0, x, 0, y, leftAns, rightAns));
-            
+   			fjPool.invoke(new Version4Combine(0, x, 0, y, leftAns, rightAns));
    			return leftAns;
    		}
 	}

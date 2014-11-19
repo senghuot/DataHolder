@@ -1,5 +1,4 @@
 import java.util.concurrent.ForkJoinPool;
-import java.util.concurrent.ForkJoinTask;
 
 public class Version4 extends Version2 {
 	
@@ -7,9 +6,8 @@ public class Version4 extends Version2 {
 	public static final ForkJoinPool fjPool = new ForkJoinPool();
 	
 	public Version4(CensusData c, int x, int y) {
-		super(c, x, y);
-		Rectangle tmp = new Rectangle(minX, maxX, maxY, minY, 0);
-		popGrid = fjPool.invoke(new Version4init(0, census.data_size, x, y, tmp, census));
+		super(c, x, y); // use version constructor then the rec will get completed in parallel
+		popGrid = fjPool.invoke(new Version4init(0, census.data_size, x, y, rec, census));
 		// convert population grid into cumulative grid
 		for (int i = 0; i < x; i++) {
 			for (int j = 0; j < y; j++) {
@@ -29,10 +27,11 @@ public class Version4 extends Version2 {
 	}
 
     public void query(int west, int south, int east, int north) {
-    	west--;
-    	south--;
-    	east--;
-    	north--;
+        // convert the query coordinate to base zero
+        west--;
+        south--;
+        east--;
+        north--;
         int total = popGrid[east][north];
         
         // remove top
@@ -44,9 +43,7 @@ public class Version4 extends Version2 {
         // add some of it back in
         if (south - 1 >=0 && west - 1 >= 0)
            total += popGrid[west - 1][south - 1];
-        
-        double ratio = (100.0 * total) / population;
-        System.out.println("population of rectangle: " + total);
-        System.out.printf("percent of total: %.2f \n", ratio);
-    }
+
+        print(total);
+     }
 }

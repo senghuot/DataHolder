@@ -3,11 +3,11 @@ import java.util.concurrent.RecursiveTask;
 public class Version2Query extends RecursiveTask<Integer> {
 	private int lo;
 	private int hi;
+	private int x;
+	private int y;
 	private CensusData census;
 	private Rectangle rec;
 	private Rectangle queryRec;
-	private int x;
-	private int y;
 	
 	public static final int SEQUENCTIAL_CUTOFF = 1000;
 	
