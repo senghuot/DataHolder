@@ -58,26 +58,25 @@ public class PopulationQuery {
 	// argument 4: -v1, -v2, -v3, -v4, or -v5
 	public static void main(String[] args) {
 		// shut down the problem if user doesn't provide at least 4 arguments
-		String[] test = {"java", "CenPop2010.txt", "100", "500", "-v4"}; 
-		args = test;
 		if (args.length < 4)
 			System.exit(0);
 		
 		// parsing to get X & Y coordinates and other variable
-		int x = Integer.parseInt(args[2]);
-		int y = Integer.parseInt(args[3]);
-		CensusData census = parse(args[1]);
+		int x = Integer.parseInt(args[1]);
+		int y = Integer.parseInt(args[2]);
+		CensusData census = parse(args[0]);
       
 		// might have to re-design the class. possibly having a superclass then
 		// four different version of class
 		Version0 v = null;
-		if (args[4].equals("-v1")) {
+		String version = args[3];
+		if (version.equals("-v1")) {
 			v = new Version1(census, x, y);
-		} else if (args[4].equals("-v2")) {
+		} else if (version.equals("-v2")) {
 			v = new Version2(census, x, y);
-		} else if (args[4].equals("-v3")) {
+		} else if (version.equals("-v3")) {
 			v = new Version3(census, x, y);
-		} else if (args[4].equals("-v4")) {
+		} else if (version.equals("-v4")) {
 			v = new Version4(census, x, y);
 		}
 
@@ -90,6 +89,12 @@ public class PopulationQuery {
 			int east = Integer.parseInt(input[2]);
 			int north = Integer.parseInt(input[3]);
 			
+			if ((west < 1 || west > x) || 
+					(north < south || south > y) ||
+					(east < west || east > x) ||
+					(north < south || south > y)) 
+				throw new IllegalArgumentException("Incorrect bounds!");
+				
 			// query then print out the result
 			v.query(west, south, east, north); 
 			input = input(console);

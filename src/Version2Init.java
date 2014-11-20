@@ -17,7 +17,9 @@ public class Version2Init extends RecursiveTask<Rectangle> {
 	@Override
 	protected Rectangle compute() {      
         if (hi - lo < SEQUENCTIAL_CUTOFF) {
-        	return Version1s.init(lo, hi, census);
+        	Rectangle rec = new Rectangle(0, 0, 0, 0, 0);
+        	Version1s.init(census, rec, lo, hi);
+			return rec;
    		} else {
    			Version2Init left = new Version2Init(lo, (hi + lo) / 2, census);
    			Version2Init right = new Version2Init((hi+ lo) / 2, hi, census);

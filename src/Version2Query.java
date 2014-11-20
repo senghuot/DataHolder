@@ -26,8 +26,9 @@ public class Version2Query extends RecursiveTask<Integer> {
 		if (hi - lo < SEQUENCTIAL_CUTOFF) {
 			int res = 0;
 			for (int i = lo; i < hi; i++) {
-				if (Version1s.contains(census.data[i], rec, queryRec, x, y))
-					res += census.data[i].population;
+				CensusGroup tmp = census.data[i];
+				if (contains(tmp))
+					res += tmp.population;
 			}
 			return res;
 		} else {
@@ -38,5 +39,9 @@ public class Version2Query extends RecursiveTask<Integer> {
 			int leftAns = left.join();
 			return rightAns + leftAns;
 		}
+	}
+	
+	private boolean contains(CensusGroup census) {
+		return Version1s.contains(census, rec, queryRec, x, y);
 	}
 }

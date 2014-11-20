@@ -1,6 +1,10 @@
-
+/**
+ * Code refactoring for Version 3 & 4 due to their similar behaviour.
+ * @author senghuot
+ */
 public class Version3s {
 	
+	// addding 
 	public static void cumulativeGrid(int[][] popGrid) {
 		// convert population grid into cumulative grid
 		for (int i = 0; i < popGrid.length; i++) {
