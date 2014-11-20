@@ -10,7 +10,7 @@ public class Version4init extends RecursiveTask<int[][]> {
 	private CensusData census;
 	
 	public static final ForkJoinPool fjPool = new ForkJoinPool();
-	public static final int SEQUENCTIAL_CUTOFF = 10000;
+	public static final int SEQUENCTIAL_CUTOFF = 50000;
 	
 	public Version4init(int l, int h, int x, int y, Rectangle r, CensusData c) {
 		census = c;

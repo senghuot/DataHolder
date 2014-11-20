@@ -90,7 +90,7 @@ public class PopulationQueryTest {
 				v = new Version4(census, x, y);
 			}
 			
-			for (int j = 1; j <= ITERATION * 10; j++) {
+			for (int j = 1; j <= 40; j++) {
 				int west = random(1, x);
 				int south = random(1, y);
 				int east = random(west, x);
@@ -107,7 +107,8 @@ public class PopulationQueryTest {
 			}
 		}
 		end = System.nanoTime();
-		System.out.println("avg: " + ((end - start) / (ITERATION - WARM_UP)));
+		double avg = (end - start) / (ITERATION - WARM_UP) / 1000000.0;
+		System.out.printf("avg: %.3f \n", avg);
 	}
 	
 	public static int random(int min, int max) {
