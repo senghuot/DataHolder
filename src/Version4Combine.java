@@ -9,7 +9,7 @@ public class Version4Combine extends RecursiveAction {
 	protected int[][] left;
 	protected int[][] right;
 	
-	public static final int SEQUENCTIAL_CUTOFF = 1000;
+	public static final int SEQUENCTIAL_CUTOFF = 10000;
 	
 	public Version4Combine(int loX, int hiX, int loY, int hiY, int[][] le, int[][] ri) {
 		lowX = loX;

@@ -9,6 +9,8 @@ public class PopulationQueryTest {
 	public static final int POPULATION_INDEX = 4; // zero-based indices
 	public static final int LATITUDE_INDEX   = 5;
 	public static final int LONGITUDE_INDEX  = 6;
+	public static final int WARM_UP = 5;
+	public static final int ITERATION = 50; 
 	
 	// parse the input file into a large array held in a CensusData object
 	public static CensusData parse(String filename) {
@@ -61,33 +63,37 @@ public class PopulationQueryTest {
 		if (args.length < 4)
 			System.exit(0);
 		
+		// start timing
+		long start = 0;
+		long end = 0;
+		
 		// parsing to get X & Y coordinates and other variable
 		int x = Integer.parseInt(args[1]);
 		int y = Integer.parseInt(args[2]);
 		CensusData census = parse(args[0]);
-      
-		// might have to re-design the class. possibly having a superclass then
-		// four different version of class
-		Version0 v = null;
-		String version = args[3];
-		if (version.equals("-v1")) {
-			v = new Version1(census, x, y);
-		} else if (version.equals("-v2")) {
-			v = new Version2(census, x, y);
-		} else if (version.equals("-v3")) {
-			v = new Version3(census, x, y);
-		} else if (version.equals("-v4")) {
-			v = new Version4(census, x, y);
-		}
-
-		// break and read the input from user
-		Scanner console = new Scanner(System.in);
-		String[] input = input(console);
-		while (input.length == 4) {
-			int west = Integer.parseInt(input[0]);
-			int south = Integer.parseInt(input[1]);
-			int east = Integer.parseInt(input[2]);
-			int north = Integer.parseInt(input[3]);
+		
+		for (int i = 1; i <= ITERATION; i++) {
+			if (i == WARM_UP + 1)
+				start = System.nanoTime();
+				
+			// might have to re-design the class. possibly having a superclass then
+			// four different version of class
+			Version0 v = null;
+			String version = args[3];
+			if (version.equals("-v1")) {
+				v = new Version1(census, x, y);
+			} else if (version.equals("-v2")) {
+				v = new Version2(census, x, y);
+			} else if (version.equals("-v3")) {
+				v = new Version3(census, x, y);
+			} else if (version.equals("-v4")) {
+				v = new Version4(census, x, y);
+			}
+		
+			int west = random(1, x);
+			int south = random(1, y);
+			int east = random(west, x);
+			int north = random(south, y);
 			
 			if ((west < 1 || west > x) || 
 					(north < south || south > y) ||
@@ -96,14 +102,14 @@ public class PopulationQueryTest {
 				throw new IllegalArgumentException("Incorrect bounds!");
 				
 			// query then print out the result
-			v.query(west, south, east, north); 
-			input = input(console);
+			v.query(west, south, east, north);
 		}
+		end = System.nanoTime();
+		System.out.println("avg: " + ((end - start) / (ITERATION - WARM_UP)));
 	}
 	
-	// getting input from user
-	public static String[] input(Scanner console) {
-		System.out.println("Please give west, south, east, north coordinates of your query");
-		return console.nextLine().split(" "); 
+	public static int random(int min, int max) {
+		int range = max - min + 1;
+		return (int)(Math.random() * range) + min;
 	}
 }
