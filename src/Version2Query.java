@@ -9,7 +9,7 @@ public class Version2Query extends RecursiveTask<Integer> {
 	private Rectangle rec;
 	private Rectangle queryRec;
 	
-	public static final int SEQUENCTIAL_CUTOFF = 10000;
+	public static final int SEQUENCTIAL_CUTOFF = 1000;
 	
 	public Version2Query(int l, int h, CensusData c, Rectangle r, Rectangle q, int x, int y) {
 		lo = l;

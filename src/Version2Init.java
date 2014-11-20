@@ -5,7 +5,7 @@ public class Version2Init extends RecursiveTask<Rectangle> {
 	private int hi;
 	private CensusData census;
 	
-	public static final int SEQUENCTIAL_CUTOFF = 10000;
+	public static final int SEQUENCTIAL_CUTOFF = 1000;
 	
 	public Version2Init(int l, int h, CensusData c) {
 		census = c;

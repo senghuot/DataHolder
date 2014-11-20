@@ -10,7 +10,7 @@ public class PopulationQueryTest {
 	public static final int LATITUDE_INDEX   = 5;
 	public static final int LONGITUDE_INDEX  = 6;
 	public static final int WARM_UP = 5;
-	public static final int ITERATION = 50; 
+	public static final int ITERATION = 20; 
 	
 	// parse the input file into a large array held in a CensusData object
 	public static CensusData parse(String filename) {
@@ -89,20 +89,22 @@ public class PopulationQueryTest {
 			} else if (version.equals("-v4")) {
 				v = new Version4(census, x, y);
 			}
-		
-			int west = random(1, x);
-			int south = random(1, y);
-			int east = random(west, x);
-			int north = random(south, y);
 			
-			if ((west < 1 || west > x) || 
-					(north < south || south > y) ||
-					(east < west || east > x) ||
-					(north < south || south > y)) 
-				throw new IllegalArgumentException("Incorrect bounds!");
+			for (int j = 1; j <= ITERATION * 10; j++) {
+				int west = random(1, x);
+				int south = random(1, y);
+				int east = random(west, x);
+				int north = random(south, y);
 				
-			// query then print out the result
-			v.query(west, south, east, north);
+				if ((west < 1 || west > x) || 
+						(north < south || south > y) ||
+						(east < west || east > x) ||
+						(north < south || south > y)) 
+					throw new IllegalArgumentException("Incorrect bounds!");
+					
+				// query then print out the result
+				v.query(west, south, east, north);
+			}
 		}
 		end = System.nanoTime();
 		System.out.println("avg: " + ((end - start) / (ITERATION - WARM_UP)));
