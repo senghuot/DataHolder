@@ -1,3 +1,5 @@
+package hw6;
+
 import java.util.concurrent.RecursiveTask;
 
 public class Version2Query extends RecursiveTask<Integer> {

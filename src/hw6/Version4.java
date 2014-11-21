@@ -1,3 +1,5 @@
+package hw6;
+
 import java.util.concurrent.ForkJoinPool;
 
 public class Version4 extends Version2 {

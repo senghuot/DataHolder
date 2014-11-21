@@ -1,3 +1,5 @@
+package hw6;
+
 /**
  * Code refactoring for Version 1 & 2 due to their similar behaviour.
  * @author senghuot

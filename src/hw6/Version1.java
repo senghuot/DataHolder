@@ -1,3 +1,5 @@
+package hw6;
+
 
 public class Version1 extends Version0 {
 	
