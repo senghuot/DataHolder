@@ -6,13 +6,13 @@
  */
 public abstract class Version0 {
 	
-	// each field stores all the info for each query operation 
+	// each field stores all the info for query operations 
 	protected CensusData census;
 	protected int x;
 	protected int y;
 	protected Rectangle rec;
 	
-	// just 
+	// constructor
 	public Version0(CensusData c, int x, int y) {
 		census = c;
 		this.x = x;
@@ -22,9 +22,9 @@ public abstract class Version0 {
 	
 	// print out the bounded total population and its ratio to the total population.
 	public void print(int currPop) {
-		//double ratio = (100.0 * currPop) / rec.population;
-		//System.out.println("population of rectangle: " + currPop);
-		//System.out.printf("percent of total: %.2f \n", ratio);		
+		double ratio = (100.0 * currPop) / rec.population;
+		System.out.println("population of rectangle: " + currPop);
+		System.out.printf("percent of total: %.2f \n", ratio);		
 	}
 
 	// force each version to have query method.
