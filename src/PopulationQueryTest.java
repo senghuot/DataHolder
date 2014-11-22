@@ -1,4 +1,4 @@
-package hw6;
+
 
 import java.util.*;
 import java.io.BufferedReader;
@@ -92,7 +92,7 @@ public class PopulationQueryTest {
 				v = new Version4(census, x, y);
 			}
 			
-			for (int j = 1; j <= 40; j++) {
+			for (int j = 1; j <= 470; j++) {
 				int west = random(1, x);
 				int south = random(1, y);
 				int east = random(west, x);
@@ -113,6 +113,7 @@ public class PopulationQueryTest {
 		System.out.printf("avg: %.3f \n", avg);
 	}
 	
+	// generating a random within min and max integer
 	public static int random(int min, int max) {
 		int range = max - min + 1;
 		return (int)(Math.random() * range) + min;

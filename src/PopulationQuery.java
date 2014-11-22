@@ -1,4 +1,4 @@
-package hw6;
+
 
 import java.util.*;
 import java.io.BufferedReader;

@@ -1,8 +1,10 @@
-package hw6;
-
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveTask;
 
+/**
+  * A thread to find the corners in parallel
+ * @author senghuot
+ */
 public class Version4init extends RecursiveTask<int[][]> {
 	private int lo;
 	private int hi;
@@ -14,6 +16,7 @@ public class Version4init extends RecursiveTask<int[][]> {
 	public static final ForkJoinPool fjPool = new ForkJoinPool();
 	public static final int SEQUENCTIAL_CUTOFF = 50000;
 	
+	// construct a thread to make a population grid
 	public Version4init(int l, int h, int x, int y, Rectangle r, CensusData c) {
 		census = c;
 		hi = h;
@@ -23,8 +26,7 @@ public class Version4init extends RecursiveTask<int[][]> {
 		this.y = y;
 	}
 	
-	//float l, float r, float t, float b, int p
-	@Override
+	// to make a population grid
 	protected int[][] compute() {      
         if (hi - lo < SEQUENCTIAL_CUTOFF) {
         	int[][] ans = new int[x][y];

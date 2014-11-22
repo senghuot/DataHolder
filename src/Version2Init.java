@@ -1,22 +1,25 @@
-package hw6;
-
 import java.util.concurrent.RecursiveTask;
 
+/**
+ * A thread to find the corners in parallel.
+ * @author senghuot
+ */
 public class Version2Init extends RecursiveTask<Rectangle> {
 	private int lo;
 	private int hi;
 	private CensusData census;
 	
-	public static final int SEQUENCTIAL_CUTOFF = 5000;
+	public static final int SEQUENCTIAL_CUTOFF = 500000;
 	
+	
+	// to construct the thread
 	public Version2Init(int l, int h, CensusData c) {
 		census = c;
 		hi = h;
 		lo = l;
 	}
 	
-	//float l, float r, float t, float b, int p
-	@Override
+	// return a rectangle represent corner according to 'hi' and 'lo' indexes
 	protected Rectangle compute() {      
         if (hi - lo < SEQUENCTIAL_CUTOFF) {
         	Rectangle rec = new Rectangle(0, 0, 0, 0, 0);

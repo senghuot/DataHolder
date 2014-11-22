@@ -1,7 +1,9 @@
-package hw6;
-
 import java.util.concurrent.RecursiveTask;
 
+/**
+ * A thread to find the total population in parallel.
+ * @author senghuot
+ */
 public class Version2Query extends RecursiveTask<Integer> {
 	private int lo;
 	private int hi;
@@ -11,8 +13,9 @@ public class Version2Query extends RecursiveTask<Integer> {
 	private Rectangle rec;
 	private Rectangle queryRec;
 	
-	public static final int SEQUENCTIAL_CUTOFF = 5000;
+	public static final int SEQUENCTIAL_CUTOFF = 500000;
 	
+	// to construct the thread
 	public Version2Query(int l, int h, CensusData c, Rectangle r, Rectangle q, int x, int y) {
 		lo = l;
 		hi = h;
@@ -23,13 +26,13 @@ public class Version2Query extends RecursiveTask<Integer> {
 		this.y = y;
 	}
 	
-	
+	// return a total population according to 'hi' and 'lo' indexes
 	protected Integer compute() {
 		if (hi - lo < SEQUENCTIAL_CUTOFF) {
 			int res = 0;
 			for (int i = lo; i < hi; i++) {
 				CensusGroup tmp = census.data[i];
-				if (contains(tmp))
+				if (Version1s.contains(tmp, rec, queryRec, x, y))
 					res += tmp.population;
 			}
 			return res;
@@ -41,9 +44,5 @@ public class Version2Query extends RecursiveTask<Integer> {
 			int leftAns = left.join();
 			return rightAns + leftAns;
 		}
-	}
-	
-	private boolean contains(CensusGroup census) {
-		return Version1s.contains(census, rec, queryRec, x, y);
 	}
 }

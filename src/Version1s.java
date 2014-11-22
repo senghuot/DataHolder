@@ -1,12 +1,10 @@
-package hw6;
-
 /**
- * Code refactoring for Version 1 & 2 due to their similar behaviour.
+ * Code refactoring for Version 1 & 2 due to their similarity.
  * @author senghuot
  */
 public class Version1s {
 	
-	// 
+	// finding the four corner coordinates given the census data
 	public static void init(CensusData census, Rectangle rec, int lo, int hi) {
 		if (hi - lo > 0) {
 			rec.bottom = census.data[lo].latitude; 
@@ -26,6 +24,7 @@ public class Version1s {
 		}
 	}
 	
+	// return true iff the given census group contains within bounded query.
 	public static boolean contains(CensusGroup census, Rectangle rec, Rectangle queryRec, int x, int y) {
 		float widthXChunk = (rec.right - rec.left) / x;
 		float widthYChunk = (rec.top - rec.bottom) / y;

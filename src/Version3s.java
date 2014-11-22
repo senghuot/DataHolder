@@ -1,12 +1,10 @@
-package hw6;
-
 /**
  * Code refactoring for Version 3 & 4 due to their similar behaviour.
  * @author senghuot
  */
 public class Version3s {
 	
-	// addding 
+	// convert population grid into cumulative population grid
 	public static void cumulativeGrid(int[][] popGrid) {
 		// convert population grid into cumulative grid
 		for (int i = 0; i < popGrid.length; i++) {
@@ -26,6 +24,7 @@ public class Version3s {
 		}
 	}
 
+	// return the total population whitin the given bound
     public static int query(int west, int south, int east, int north, int[][] popGrid) {
         // convert the query coordinate to base zero
         west--;

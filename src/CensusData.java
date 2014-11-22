@@ -1,6 +1,3 @@
-package hw6;
-
-
 // just a resizing array for holding the input
 // fields are public for simplicity
 // note array may not be full; see data_size field

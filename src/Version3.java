@@ -1,21 +1,26 @@
-package hw6;
-
-
+/**
+ * Version 3 performs extra pre-processing before attempting any query. Pre-processing allows
+ * version 3 to answer queries in constant time. 
+ * @author senghuot
+ */
 public class Version3 extends Version1 {
 
-	private int[][] popGrid;
+	private int[][] popGrid; // to group and store cummulative population
 	
+	// constructor for version 3
 	public Version3(CensusData census, int x, int y) {
 		super(census, x, y);
 		fillPopGrid();
 	}
 	
+	// using query bounded rectangle then print out the population and its ratio
     public void query(int west, int south, int east, int north) {
     	// convert the query coordinate to base zero
     	int currPop = Version3s.query(west, south, east, north, popGrid);
     	print(currPop);
    }
 
+    // sequentially build a population grid then convert it into a cummulative grid
 	private void fillPopGrid() {
 		popGrid = new int[x][y];
 		

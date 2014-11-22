@@ -1,8 +1,9 @@
-package hw6;
-
 import java.util.concurrent.RecursiveAction;
-import java.util.concurrent.RecursiveTask;
 
+/**
+ * A thread to combine left and right grid in parallel
+ * @author senghuot
+ */
 public class Version4Combine extends RecursiveAction {
 	private int lowX;
 	private int highX;
@@ -11,8 +12,9 @@ public class Version4Combine extends RecursiveAction {
 	protected int[][] left;
 	protected int[][] right;
 	
-	public static final int SEQUENCTIAL_CUTOFF = 50000;
+	public static final int SEQUENTIAL_CUTOFF = 50000;
 	
+	// construct the thread to combine the left and right grid
 	public Version4Combine(int loX, int hiX, int loY, int hiY, int[][] le, int[][] ri) {
 		lowX = loX;
 		highX = hiX;
@@ -22,8 +24,10 @@ public class Version4Combine extends RecursiveAction {
 		right = ri;
 	}
 	
+	// to combine left and right grid together without taking more space by adding
+	// right grid to left grid.
 	protected void compute() {
-		if (((highX - lowX) * (highY - lowY)) < SEQUENCTIAL_CUTOFF) {
+		if (((highX - lowX) * (highY - lowY)) < SEQUENTIAL_CUTOFF) {
 			for (int i = lowX; i < highX; i++) {
 				for (int j = lowY; j < highY; j++)
 					left[i][j] += right[i][j];

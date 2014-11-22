@@ -1,4 +1,4 @@
-package hw6;
+
 
 
 // A class to represent a Rectangle
