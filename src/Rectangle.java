@@ -29,8 +29,4 @@ public class Rectangle {
 				             Math.min(this.bottom, that.bottom),
 				             population + that.population);
 	}
-	
-	public String toString() {
-		return "[left=" + left + " right=" + right + " top=" + top + " bottom=" + bottom + "population=" + population + "]";
-	}
 }
